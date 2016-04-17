@@ -57,12 +57,6 @@ public interface IPelicula {
     public void setId(Comparable id);
     
     /**
-     * Metodo que setea el nombre de la pelicula
-     * @param name De tipo String
-     */
-    public void setName(String name);
-    
-    /**
      * Metodo que setea la puntuación de la pelicula
      * @param puntuation de tipo int
      */

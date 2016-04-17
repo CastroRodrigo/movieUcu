@@ -25,11 +25,6 @@ public class Actor implements Interfaces.IActor{
     }
 
     @Override
-    public void setId(Comparable id) {
-        this.idActor = id;
-    }
-
-    @Override
     public void setName(String name) {
         this.name = name;
     }

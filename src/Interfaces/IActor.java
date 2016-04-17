@@ -18,12 +18,6 @@ public interface IActor {
     public String getName();
     
     /**
-     * Metodo que setea el id de la actor 
-     * @param id de tipo Comparable
-     */
-    public void setId(Comparable id);
-    
-    /**
      * Metodo que setea el nombre del actor
      * @param name de tipo String
      */

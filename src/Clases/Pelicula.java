@@ -68,11 +68,6 @@ public class Pelicula implements Interfaces.IPelicula {
     }
 
     @Override
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    @Override
     public void setPuntuation(int puntuation) {
         this.puntuation = puntuation;
     }
