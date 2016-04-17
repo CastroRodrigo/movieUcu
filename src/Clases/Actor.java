@@ -1,10 +1,12 @@
 
 package Clases;
 
+import Interfaces.*;
+
 /**
  * @author Rodrigo Castro
  */
-public class Actor implements Interfaces.IActor{
+public class Actor implements IActor{
     
     private Comparable idActor;
     private String name;

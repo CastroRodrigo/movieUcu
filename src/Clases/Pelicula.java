@@ -1,10 +1,12 @@
 
 package Clases;
 
+import Interfaces.*;
+
 /**
  * @author Rodrigo Castro
  */
-public class Pelicula implements Interfaces.IPelicula {
+public class Pelicula implements IPelicula {
 
     private Comparable IdPelicula;
     private String name;
