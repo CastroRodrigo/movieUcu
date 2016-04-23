@@ -8,7 +8,7 @@ import Interfaces.*;
  *
  * @author Rodrigo Castro
  */
-public interface MovieUcuAdapter {
+public interface IMovieUcuAdapter {
     
     public Lista getListPelicula();
     

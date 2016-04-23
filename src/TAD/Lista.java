@@ -1,32 +1,38 @@
 
 package TAD;
 
+import sun.applet.Main;
+
 /**
  * @author Rodrigo Castro
  */
 public class Lista<E> implements ILista<E> {
 
     private INodo<E> primero;
+    private INodo<E> ultimo;
 
     public Lista() {
         primero = null;
+        ultimo = null;
     }
 
     public Lista(INodo<E> unNodo) {
         this.primero = unNodo;
+        ultimo = primero;
     }
 
     @Override
     public void insertar(INodo<E> unNodo) {
         if (esVacia()) {
             primero = unNodo;
-        } else {
-            INodo<E> aux = primero;
-            while (aux.getSiguiente() != null) {
-                aux = aux.getSiguiente();
-            }
-            aux.setSiguiente(unNodo);
+            ultimo = primero;
         }
+        else if (ultimo != null){
+            INodo<E> aux = ultimo;
+            ultimo.setSiguiente(unNodo);
+            ultimo = ultimo.getSiguiente();
+        }
+        
     }
 
     @Override
@@ -146,5 +152,23 @@ public class Lista<E> implements ILista<E> {
            return aux;
         }
     }    
-    
+  
+    /*
+    public static void main(String[] args) {
+        
+        INodo nodoPrueba = new Nodo("hola",1);
+        INodo nodoPrueba2 = new Nodo("hola2",2);
+        INodo nodoPrueba3 = new Nodo("hola",3);
+                INodo nodoPrueba4 = new Nodo("hola",5);
+
+        ILista listaPrueba = new Lista();
+        listaPrueba.insertar(nodoPrueba2);
+        listaPrueba.insertar(nodoPrueba);
+        listaPrueba.insertar(nodoPrueba3);
+        System.out.println(listaPrueba.imprimir(","));
+        listaPrueba.insertar(nodoPrueba4);
+        System.out.println(listaPrueba.imprimir(","));
+        
+    }
+    */
 }

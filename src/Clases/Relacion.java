@@ -6,16 +6,17 @@ package Clases;
  */
 public class Relacion {
     
-    private Comparable idActor;
+    private Comparable id;
     private Comparable idPelicula;
     
     /**
-     * Metodo que retorna el Id del actor
+     * Metodo que retorna el Id del actor, director o productor asociado
+     * a la pelicula
      * @see Actor#idActor
      * @return idActor
      */
      public Comparable getIdActor() {
-        return idActor;
+        return id;
     }
      
      /**

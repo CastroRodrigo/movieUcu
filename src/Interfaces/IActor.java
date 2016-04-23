@@ -17,10 +17,5 @@ public interface IActor {
      */
     public String getName();
     
-    /**
-     * Metodo que setea el nombre del actor
-     * @param name de tipo String
-     */
-    public void setName(String name);
     
 }
