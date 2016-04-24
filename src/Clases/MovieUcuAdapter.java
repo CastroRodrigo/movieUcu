@@ -96,5 +96,20 @@ public class MovieUcuAdapter implements IMovieUcuAdapter {
     public Lista<Relacion> getPeliculasProductores() {
         return listaPeliculasProductores;
     }
+
+    @Override
+    public void agregarActor(IActor actor) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void agregarDiretor(IDirector director) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void agregarProductor(IProductor productor) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
     
 }

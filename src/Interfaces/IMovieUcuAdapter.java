@@ -73,6 +73,24 @@ public interface IMovieUcuAdapter {
     public void agregarPelicula(IPelicula pelicula);
     
     /**
+     * Metodo que agrega un actor a la liste de actores 
+     * @param actor de tipo IActor
+     */
+    public void agregarActor(IActor actor);
+    
+    /**
+     * Metodo que agrega un director a la lista de directores 
+     * @param director de tipo IDirector 
+     */
+    public void agregarDiretor(IDirector director);
+    
+    /**
+     * Metodo que agrega un productor a la lista de productores
+     * @param productor 
+     */
+    public void agregarProductor (IProductor productor);
+    
+    /**
      * Metodo que elimina una pelicula de la lista de peliculas 
      * @param idPelicula Es el id de la pelicula de tipo Comparable
      * @return retorna true si la pelicula existe y fue
