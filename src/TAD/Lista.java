@@ -71,6 +71,11 @@ public class Lista<E> implements ILista<E> {
             return true;
         }
         while (aux.getSiguiente() != null) {
+            if (aux.getSiguiente().getEtiqueta().equals(clave) && aux.getSiguiente() == ultimo){
+                aux.setSiguiente(null);
+                ultimo = aux;
+                return true;
+            }
             if (aux.getSiguiente().getEtiqueta().equals(clave)) {
                 INodo<E> temp = aux.getSiguiente();
                 aux.setSiguiente(temp.getSiguiente());
@@ -141,25 +146,16 @@ public class Lista<E> implements ILista<E> {
     
     @Override
     public INodo<E> getUltimo() {
-        if (esVacia()) {
-            return null;
-        }
-        else{
-           INodo aux = primero;
-           while(aux.getSiguiente()!= null){
-               aux = aux.getSiguiente();
-           }
-           return aux;
-        }
+           return ultimo;
     }    
   
     /*
     public static void main(String[] args) {
         
-        INodo nodoPrueba = new Nodo("hola",1);
+        INodo nodoPrueba = new Nodo("hola1",1);
         INodo nodoPrueba2 = new Nodo("hola2",2);
-        INodo nodoPrueba3 = new Nodo("hola",3);
-                INodo nodoPrueba4 = new Nodo("hola",5);
+        INodo nodoPrueba3 = new Nodo("hola3",3);
+        INodo nodoPrueba4 = new Nodo("hola5",5);
 
         ILista listaPrueba = new Lista();
         listaPrueba.insertar(nodoPrueba2);
@@ -168,7 +164,12 @@ public class Lista<E> implements ILista<E> {
         System.out.println(listaPrueba.imprimir(","));
         listaPrueba.insertar(nodoPrueba4);
         System.out.println(listaPrueba.imprimir(","));
-        
+        //listaPrueba.eliminar(2);
+        //System.out.println(listaPrueba.imprimir(","));
+        //listaPrueba.eliminar(5);
+        //System.out.println(listaPrueba.imprimir(","));
+        listaPrueba.eliminar(1);
+        System.out.println(listaPrueba.imprimir(","));
     }
     */
 }
