@@ -34,22 +34,26 @@ public class MovieUcuAdapter implements IMovieUcuAdapter {
 
     @Override
     public void agregarPelicula(IPelicula pelicula) {
-        INodo<IPelicula> nuevaPelicula = new Nodo(pelicula, pelicula.getId());
-        listaPeliculas.insertar(nuevaPelicula);
+        if (pelicula != null ){
+            if(this.listaPeliculas == null){
+                this.listaPeliculas = new Lista<>();
+            }
+            INodo<IPelicula> nuevaPelicula = new Nodo(pelicula, pelicula.getId());
+            this.listaPeliculas.insertar(nuevaPelicula);
+        }
+        else{
+            throw new NullPointerException("La pelicula es null."); 
+        }
     }
 
     @Override
     public boolean eliminarPelicula(Comparable idPelicula) {
-        if (listaPeliculas.esVacia()){
-            return false;
+        if(idPelicula != null && this.listaPeliculas != null){
+            return this.listaPeliculas.eliminar(idPelicula);
         }
         else{
-            INodo resultado = listaPeliculas.buscar(idPelicula);
-            if (resultado == null){
-                return false;
-            }  
+            throw new NullPointerException("No se encontro la pelicula."); 
         }
-        return true;
     }
 
     @Override
@@ -63,7 +67,7 @@ public class MovieUcuAdapter implements IMovieUcuAdapter {
     }
 
     @Override
-    public void crearListas() {
+    public void crearListaPeliculas() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
@@ -109,6 +113,36 @@ public class MovieUcuAdapter implements IMovieUcuAdapter {
 
     @Override
     public void agregarProductor(IProductor productor) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void crearListaActores() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void crearListaDirectores() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void crearListaProductores() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void crearListaPeliculasActores() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void crearListaPeliculasDirectores() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void crearListaPeliculasProductores() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     

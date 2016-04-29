@@ -10,16 +10,45 @@ import Clases.*;
 public interface IMovieUcuAdapter {
     
     /**
-     * Metodo que crea las listas que serviran para almacenar los objetos fundamentales del sistema
-     * @see MovieUcuAdapter#listaActores
-     * @see MovieUcuAdapter#listaDirectores
+     * Metodo que crea la lista de Peliculas
      * @see MovieUcuAdapter#listaPeliculas
+     */
+    public void crearListaPeliculas();
+    /**
+     * Metodo que crea la lista de Actores
+     * @see MovieUcuAdapter#listaActores
+     */
+    public void crearListaActores();
+    
+    /**
+     * Metodo que crea la lista de Directores
+     * @see MovieUcuAdapter#listaDirectores
+     */
+    public void crearListaDirectores();
+    
+    /**
+     * Metodo que crea la lista de Productores
      * @see MovieUcuAdapter#listaProductores
+     */
+    public void crearListaProductores();
+    
+    /**
+     * Metodo que crea la lista los actores segun las pelculas que actuaron
      * @see MovieUcuAdapter#listaPeliculasActores
+     */
+    public void crearListaPeliculasActores();
+    /**
+     * Metodo que crea la lista los directores segun las pelculas que dirigieron
      * @see MovieUcuAdapter#listaPeliculasDirectores
+     */
+    public void crearListaPeliculasDirectores();
+    
+    /**
+     * Metodo que crea la lista los productores segun las pelculas que produgeron
      * @see MovieUcuAdapter#listaPeliculasProductores
      */
-    public void crearListas();
+    public void crearListaPeliculasProductores();
+    
     
     /**
      * Metodo que retorna una lista de pelicualas
