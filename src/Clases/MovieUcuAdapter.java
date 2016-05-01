@@ -160,7 +160,7 @@ public class MovieUcuAdapter implements IMovieUcuAdapter {
     public void crearListaActores() {
         String[] lineas = ManejadorArchivosGenerico.leerArchivo(textoActores, false);
         for(int linea=0;linea<lineas.length;linea++){
-            String[] datos = lineas[linea].split("|");
+            String[] datos = lineas[linea].split("\\|");
             IActor act = new Actor(Integer.parseInt(datos[0]),datos[1]);
             this.agregarActor(act);
         }
@@ -172,7 +172,7 @@ public class MovieUcuAdapter implements IMovieUcuAdapter {
     public void crearListaDirectores() {
         String[] lineas = ManejadorArchivosGenerico.leerArchivo(textoDirectores, false);
         for(int linea=0; linea<lineas.length;linea++){
-           String[] datos = lineas[linea].split("|");
+           String[] datos = lineas[linea].split("\\|");
            IDirector dir = new Director(Integer.parseInt(datos[0]),datos[1]);
            this.agregarDiretor(dir);
         }
@@ -182,7 +182,7 @@ public class MovieUcuAdapter implements IMovieUcuAdapter {
     public void crearListaProductores() {
         String[] lineas = ManejadorArchivosGenerico.leerArchivo(textoProductores, false);
         for(int linea=0; linea<lineas.length;linea++){
-            String[] datos = lineas[linea].split("|");
+            String[] datos = lineas[linea].split("\\|");
             IProductor pro = new Productor(Integer.parseInt(datos[0]),datos[1]);
             this.agregarProductor(pro);
         }
@@ -192,7 +192,7 @@ public class MovieUcuAdapter implements IMovieUcuAdapter {
     public void crearListaPeliculasActores() {
         String[] lineas = ManejadorArchivosGenerico.leerArchivo(textoPeliculasActores, false);
         for(int linea=0; linea<lineas.length;linea++){
-            String[] datos = lineas[linea].split("|");
+            String[] datos = lineas[linea].split("\\|");
             Relacion peliActor = new Relacion(Integer.parseInt(datos[0]),Integer.parseInt(datos[1]));
             this.agregarRelacion(peliActor, listaPeliculasActores);
         }
@@ -202,7 +202,7 @@ public class MovieUcuAdapter implements IMovieUcuAdapter {
     public void crearListaPeliculasDirectores() {
         String[] lineas = ManejadorArchivosGenerico.leerArchivo(textoPeliculasDirectores, false);
         for(int linea=0; linea<lineas.length;linea++){
-            String[] datos = lineas[linea].split("|");
+            String[] datos = lineas[linea].split("\\|");
             Relacion peliDire = new Relacion(Integer.parseInt(datos[0]),Integer.parseInt(datos[1]));
             this.agregarRelacion(peliDire, listaPeliculasDirectores);
         }
@@ -212,7 +212,7 @@ public class MovieUcuAdapter implements IMovieUcuAdapter {
     public void crearListaPeliculasProductores() {
         String[] lineas = ManejadorArchivosGenerico.leerArchivo(textoPeliculasProductores, false);
         for(int linea=0; linea<lineas.length;linea++){
-            String[] datos = lineas[linea].split("|");
+            String[] datos = lineas[linea].split("\\|");
             Relacion peliPro = new Relacion(Integer.parseInt(datos[0]),Integer.parseInt(datos[1]));
             this.agregarRelacion(peliPro, listaPeliculasProductores);
         }
