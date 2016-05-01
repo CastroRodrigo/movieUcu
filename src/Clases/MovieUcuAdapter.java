@@ -103,27 +103,66 @@ public class MovieUcuAdapter implements IMovieUcuAdapter {
 
     @Override
     public void agregarActor(IActor actor) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        if (actor != null ){
+            if(this.listaActores == null){
+                this.listaActores = new Lista<>();
+            }
+            INodo<IActor> nuevoActor = new Nodo(actor, actor.getId());
+            this.listaActores.insertar(nuevoActor);
+        }
+        else{
+            throw new NullPointerException("El Actor es null."); 
+        }
     }
 
     @Override
     public void agregarDiretor(IDirector director) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        if (director != null ){
+            if(this.listaDirectores == null){
+                this.listaDirectores = new Lista<>();
+            }
+            INodo<IDirector> nuevoDirector = new Nodo(director, director.getId());
+            this.listaDirectores.insertar(nuevoDirector);
+        }
+        else{
+            throw new NullPointerException("El Director es null."); 
+        } 
     }
 
     @Override
     public void agregarProductor(IProductor productor) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        if (productor != null ){
+            if(this.listaProductores == null){
+                this.listaProductores = new Lista<>();
+            }
+            INodo<IProductor> nuevoProductor = new Nodo(productor, productor.getId());
+            this.listaProductores.insertar(nuevoProductor);
+        }
+        else{
+            throw new NullPointerException("El Productor es null."); 
+        } 
     }
 
     @Override
     public void crearListaActores() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        String[] lineas = ManejadorArchivosGenerico.leerArchivo("src/Files/Small-Actores.txt", true);
+        for(int linea=0;linea<lineas.length;linea++){
+            String[] datos = lineas[linea].split("|");
+            IActor act = new Actor(Integer.parseInt(datos[0]),datos[1]);
+            this.agregarActor(act);
+        }
+        
+        
     }
 
     @Override
     public void crearListaDirectores() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        String[] lineas = ManejadorArchivosGenerico.leerArchivo("src/Files/Small-Directores.txt", true);
+        for(int linea=0; linea<lineas.length;linea++){
+           String[] datos = lineas[linea].split("|");
+           IDirector dir = new Director(Integer.parseInt(datos[0]),datos[1]);
+           this.agregarDiretor(dir);
+        }
     }
 
     @Override
