@@ -10,7 +10,7 @@ public class Pelicula implements IPelicula {
 
     private Comparable IdPelicula;
     private String name;
-    private int puntuation;
+    private float puntuation;
     private int year;
     private String review;
     private String genre;
@@ -24,7 +24,7 @@ public class Pelicula implements IPelicula {
      * @param review Reseña de la pelicula de tipo String 
      * @param genre Genero de la pelicula de tipo String
      */
-    public Pelicula(Comparable IdPelicula, String name, int puntuation, int year, String review, String genre) {
+    public Pelicula(Comparable IdPelicula, String name, int year,float puntuation, String review, String genre) {
         this.IdPelicula = IdPelicula;
         this.name = name;
         this.puntuation = puntuation;
@@ -45,7 +45,7 @@ public class Pelicula implements IPelicula {
     }
 
     @Override
-    public int getPuntuation() {
+    public float getPuntuation() {
         return puntuation;
     }
 

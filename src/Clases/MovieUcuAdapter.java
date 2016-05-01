@@ -11,6 +11,7 @@ import Interfaces.IMovieUcuAdapter;
 import Interfaces.IPelicula;
 import Interfaces.IProductor;
 import TAD.INodo;
+import TAD.ILista;
 import TAD.Lista;
 import TAD.Nodo;
 
@@ -26,6 +27,13 @@ public class MovieUcuAdapter implements IMovieUcuAdapter {
     Lista<Relacion> listaPeliculasActores;
     Lista<Relacion> listaPeliculasDirectores;
     Lista<Relacion> listaPeliculasProductores;
+    String textoProductores = "src/Files/Small-Productores.txt";
+    String textoDirectores = "src/Files/Small-Directores.txt" ;
+    String textoActores = "src/Files/Small-Actores.txt";
+    String textoPelicula = "src/Files/Small-Peliculas.txt";
+    String textoPeliculasActores = "src/Files/Small-PeliculasActores.txt";
+    String textoPeliculasDirectores = "src/Files/Small-PeliculasDirectores.txt";
+    String textoPeliculasProductores = "src/Files/Small-PeliculasProductores.txt";
     
     @Override
     public Lista getListPelicula() {
@@ -68,7 +76,12 @@ public class MovieUcuAdapter implements IMovieUcuAdapter {
 
     @Override
     public void crearListaPeliculas() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        String[] lineas = ManejadorArchivosGenerico.leerArchivo(textoPelicula, false);
+        for(int linea=0;linea<lineas.length;linea++){
+            String[] datos = lineas[linea].split("\\|");
+            IPelicula peli = new Pelicula(Integer.parseInt(datos[0]),datos[1],Integer.parseInt(datos[2]),Float.parseFloat(datos[3]),datos[4],datos[5]);
+            this.agregarPelicula(peli);
+        }
     }
 
     @Override
@@ -145,7 +158,7 @@ public class MovieUcuAdapter implements IMovieUcuAdapter {
 
     @Override
     public void crearListaActores() {
-        String[] lineas = ManejadorArchivosGenerico.leerArchivo("src/Files/Small-Actores.txt", true);
+        String[] lineas = ManejadorArchivosGenerico.leerArchivo(textoActores, false);
         for(int linea=0;linea<lineas.length;linea++){
             String[] datos = lineas[linea].split("|");
             IActor act = new Actor(Integer.parseInt(datos[0]),datos[1]);
@@ -157,7 +170,7 @@ public class MovieUcuAdapter implements IMovieUcuAdapter {
 
     @Override
     public void crearListaDirectores() {
-        String[] lineas = ManejadorArchivosGenerico.leerArchivo("src/Files/Small-Directores.txt", true);
+        String[] lineas = ManejadorArchivosGenerico.leerArchivo(textoDirectores, false);
         for(int linea=0; linea<lineas.length;linea++){
            String[] datos = lineas[linea].split("|");
            IDirector dir = new Director(Integer.parseInt(datos[0]),datos[1]);
@@ -167,22 +180,63 @@ public class MovieUcuAdapter implements IMovieUcuAdapter {
 
     @Override
     public void crearListaProductores() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        String[] lineas = ManejadorArchivosGenerico.leerArchivo(textoProductores, false);
+        for(int linea=0; linea<lineas.length;linea++){
+            String[] datos = lineas[linea].split("|");
+            IProductor pro = new Productor(Integer.parseInt(datos[0]),datos[1]);
+            this.agregarProductor(pro);
+        }
     }
 
     @Override
     public void crearListaPeliculasActores() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        String[] lineas = ManejadorArchivosGenerico.leerArchivo(textoPeliculasActores, false);
+        for(int linea=0; linea<lineas.length;linea++){
+            String[] datos = lineas[linea].split("|");
+            Relacion peliActor = new Relacion(Integer.parseInt(datos[0]),Integer.parseInt(datos[1]));
+            this.agregarRelacion(peliActor, listaPeliculasActores);
+        }
     }
 
     @Override
     public void crearListaPeliculasDirectores() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        String[] lineas = ManejadorArchivosGenerico.leerArchivo(textoPeliculasDirectores, false);
+        for(int linea=0; linea<lineas.length;linea++){
+            String[] datos = lineas[linea].split("|");
+            Relacion peliDire = new Relacion(Integer.parseInt(datos[0]),Integer.parseInt(datos[1]));
+            this.agregarRelacion(peliDire, listaPeliculasDirectores);
+        }
     }
 
     @Override
     public void crearListaPeliculasProductores() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        String[] lineas = ManejadorArchivosGenerico.leerArchivo(textoPeliculasProductores, false);
+        for(int linea=0; linea<lineas.length;linea++){
+            String[] datos = lineas[linea].split("|");
+            Relacion peliPro = new Relacion(Integer.parseInt(datos[0]),Integer.parseInt(datos[1]));
+            this.agregarRelacion(peliPro, listaPeliculasProductores);
+        }
+    }
+
+    @Override
+    public void agregarRelacion(Relacion relacion, ILista<Relacion> lista) {
+        if (relacion != null ){
+            if(lista == null){
+                lista = new Lista<>();
+            }
+            INodo<Relacion> nuevaRelacion = new Nodo(relacion,relacion.getIdPelicula());
+            lista.insertar(nuevaRelacion);
+        }
+        else{
+            throw new NullPointerException("El Productor es null."); 
+        } 
+    }
+    
+    public static void main(String[] args) {
+        
+        IMovieUcuAdapter adapter = new MovieUcuAdapter();
+        adapter.crearListaPeliculas();
+        System.out.println(adapter.getListPelicula().imprimir());
     }
     
 }

@@ -25,7 +25,7 @@ public interface IPelicula {
      * @see Clases.Pelicula#puntuation
      * @return int puntuation
      */
-    public int getPuntuation();
+    public float getPuntuation();
     
     /**
      * Metodo que retorna el año de estreno de la pelicula

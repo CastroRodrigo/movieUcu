@@ -115,9 +115,16 @@ public interface IMovieUcuAdapter {
     
     /**
      * Metodo que agrega un productor a la lista de productores
-     * @param productor 
+     * @param productor de tipo IProductor
      */
     public void agregarProductor (IProductor productor);
+    
+    /**
+     * Metodo que agrega un element relacion a la lista
+     * @param relacion de tipo Relacion
+     * @param lista de tipo ILista
+     */
+    public void agregarRelacion (Relacion relacion, ILista<Relacion> lista);
     
     /**
      * Metodo que elimina una pelicula de la lista de peliculas 
