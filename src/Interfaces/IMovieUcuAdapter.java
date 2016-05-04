@@ -122,9 +122,20 @@ public interface IMovieUcuAdapter {
     /**
      * Metodo que agrega un element relacion a la lista
      * @param relacion de tipo Relacion
-     * @param lista de tipo ILista
      */
-    public void agregarRelacion (Relacion relacion, ILista<Relacion> lista);
+    public void agregarRelacionPeliActor (Relacion relacion);
+    
+    /**
+     * Metodo que agrega un element relacion a la lista
+     * @param relacion de tipo Relacion
+     */
+    public void agregarRelacionPeliDire (Relacion relacion);
+    
+    /**
+     * Metodo que agrega un element relacion a la lista
+     * @param relacion de tipo Relacion
+     */
+    public void agregarRelacionPeliPro (Relacion relacion);
     
     /**
      * Metodo que elimina una pelicula de la lista de peliculas 

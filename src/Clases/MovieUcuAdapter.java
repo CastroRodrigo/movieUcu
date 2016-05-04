@@ -14,6 +14,7 @@ import TAD.INodo;
 import TAD.ILista;
 import TAD.Lista;
 import TAD.Nodo;
+import java.util.ArrayList;
 
 /**
  * @author Rodrigo Castro
@@ -66,12 +67,28 @@ public class MovieUcuAdapter implements IMovieUcuAdapter {
 
     @Override
     public String imprimirPeliculas() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        StringBuilder nombres = new StringBuilder();
+        INodo<IPelicula> aux = listaPeliculas.getPrimero();
+        while(aux!=null){
+            nombres.append(aux.getDato().getName());
+            nombres.append("\n");
+            aux=aux.getSiguiente();
+        }
+        return nombres.toString();
     }
 
     @Override
-    public IPelicula buscarPelicula(Comparable IdPelicula) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public IPelicula buscarPelicula(Comparable idPelicula) {
+        INodo<IPelicula> aux = listaPeliculas.getPrimero();
+        while(aux != null){
+            if (aux.getEtiqueta().equals(idPelicula)){
+                return aux.getDato();
+            }
+            else{
+                aux = aux.getSiguiente();
+            }
+        }
+        throw new NullPointerException("La id buscada no existe");
     }
 
     @Override
@@ -194,7 +211,7 @@ public class MovieUcuAdapter implements IMovieUcuAdapter {
         for(int linea=0; linea<lineas.length;linea++){
             String[] datos = lineas[linea].split("\\|");
             Relacion peliActor = new Relacion(Integer.parseInt(datos[0]),Integer.parseInt(datos[1]));
-            this.agregarRelacion(peliActor, listaPeliculasActores);
+            this.agregarRelacionPeliActor(peliActor);
         }
     }
 
@@ -204,7 +221,7 @@ public class MovieUcuAdapter implements IMovieUcuAdapter {
         for(int linea=0; linea<lineas.length;linea++){
             String[] datos = lineas[linea].split("\\|");
             Relacion peliDire = new Relacion(Integer.parseInt(datos[0]),Integer.parseInt(datos[1]));
-            this.agregarRelacion(peliDire, listaPeliculasDirectores);
+            this.agregarRelacionPeliDire(peliDire);
         }
     }
 
@@ -214,29 +231,74 @@ public class MovieUcuAdapter implements IMovieUcuAdapter {
         for(int linea=0; linea<lineas.length;linea++){
             String[] datos = lineas[linea].split("\\|");
             Relacion peliPro = new Relacion(Integer.parseInt(datos[0]),Integer.parseInt(datos[1]));
-            this.agregarRelacion(peliPro, listaPeliculasProductores);
+            this.agregarRelacionPeliPro(peliPro);
         }
     }
 
     @Override
-    public void agregarRelacion(Relacion relacion, ILista<Relacion> lista) {
+    public void agregarRelacionPeliActor(Relacion relacion) {
         if (relacion != null ){
-            if(lista == null){
-                lista = new Lista<>();
+            if(this.listaPeliculasActores == null){
+                this.listaPeliculasActores = new Lista<>();
             }
             INodo<Relacion> nuevaRelacion = new Nodo(relacion,relacion.getIdPelicula());
-            lista.insertar(nuevaRelacion);
+            this.listaPeliculasActores.insertar(nuevaRelacion);
         }
         else{
-            throw new NullPointerException("El Productor es null."); 
+            throw new NullPointerException("La Relacion es null."); 
         } 
     }
+    
+    
+
+    @Override
+    public void agregarRelacionPeliDire(Relacion relacion) {
+        if (relacion != null ){
+            if(this.listaPeliculasDirectores == null){
+                this.listaPeliculasDirectores = new Lista<>();
+            }
+            INodo<Relacion> nuevaRelacion = new Nodo(relacion,relacion.getIdPelicula());
+            this.listaPeliculasDirectores.insertar(nuevaRelacion);
+        }
+        else{
+            throw new NullPointerException("La Relacion es null."); 
+        } 
+    }
+
+    @Override
+    public void agregarRelacionPeliPro(Relacion relacion) {
+        if (relacion != null ){
+            if(this.listaPeliculasProductores == null){
+                this.listaPeliculasProductores = new Lista<>();
+            }
+            INodo<Relacion> nuevaRelacion = new Nodo(relacion,relacion.getIdPelicula());
+            this.listaPeliculasProductores.insertar(nuevaRelacion);
+        }
+        else{
+            throw new NullPointerException("La Relacion es null."); 
+        } 
+    }
+    
     
     public static void main(String[] args) {
         
         IMovieUcuAdapter adapter = new MovieUcuAdapter();
         adapter.crearListaPeliculas();
-        System.out.println(adapter.getListPelicula().imprimir());
+        System.out.println(adapter.imprimirPeliculas());
+        //System.out.println(adapter.buscarPelicula(262500).getName());
+        //System.out.println(adapter.getListPelicula().imprimir());
+        //adapter.crearListaActores();
+        //System.out.println(adapter.getListActores().imprimir());
+        //adapter.crearListaDirectores();
+        //System.out.println(adapter.getListDirectores().imprimir());
+        //adapter.crearListaPeliculasActores();
+        //System.out.println(adapter.getPeliculasActores().imprimir());
+        adapter.crearListaPeliculasDirectores();
+        //System.out.println(adapter.getPeliculasDirectores().imprimir());
+        adapter.crearListaPeliculasActores();
+        //System.out.println(adapter.getPeliculasActores().imprimir());
+        adapter.crearListaPeliculasProductores();
+        //System.out.println(adapter.getPeliculasProductores().imprimir());
     }
     
 }
