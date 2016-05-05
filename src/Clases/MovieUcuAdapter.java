@@ -113,7 +113,6 @@ public class MovieUcuAdapter implements IMovieUcuAdapter {
             try{
                 String[] datos = lineas[linea].split("\\|");
                 IPelicula peli = new Pelicula(Integer.parseInt(datos[0]),datos[1],Integer.parseInt(datos[2]),Float.parseFloat(datos[3]),datos[4],datos[5]);
-                System.out.println(peli.getName());
                 this.agregarPelicula(peli);
             }
             catch(IndexOutOfBoundsException ex){
@@ -455,37 +454,4 @@ public class MovieUcuAdapter implements IMovieUcuAdapter {
         return infoPelicula.toString();
     }
     
-    public static void main(String[] args) {
-        
-        IMovieUcuAdapter adapter = new MovieUcuAdapter();
-        adapter.crearListaPeliculas();
-        adapter.crearListaActores();
-        adapter.crearListaDirectores();
-        adapter.crearListaProductores();
-        adapter.crearListaPeliculasActores();
-        //System.out.println(adapter.getPeliculasActores().imprimir());
-        //adapter.crearListaPeliculasDirectores();
-        //adapter.crearListaPeliculasActores();
-        //adapter.crearListaPeliculasProductores();
-        //System.out.println(adapter.obtenerInfoPelicula("Thor"));
-        //System.out.println(adapter.obtenerInfoPelicula("Jurassic World"));
-        //System.out.println(adapter.obtenerInfoPelicula("Deadpool"));
-        //System.out.println(adapter.obtenerInfoPelicula("Terminator Genisys"));
-
-        //System.out.println(adapter.buscarPorNombre("45656788").toString());
-        //System.out.println(adapter.buscarPorNombre("iron").toString());
-        //System.out.println(adapter.buscarPorYear(2010).toString());
-        //System.out.println(adapter.buscarPorGenero("fiction").toString());
-        //System.out.println(adapter.buscarPorGenero("drama").toString());
-        //System.out.println(adapter.imprimirPeliculas());
-        //System.out.println(adapter.buscarPelicula(262500).getName());
-        //System.out.println(adapter.getListPelicula().imprimir());
-        
-        //System.out.println(adapter.getListActores().imprimir());
-        //System.out.println(adapter.getListDirectores().imprimir());
-        //System.out.println(adapter.getPeliculasActores().imprimir());
-        //System.out.println(adapter.getPeliculasDirectores().imprimir());
-        //System.out.println(adapter.getPeliculasActores().imprimir());
-        //System.out.println(adapter.getPeliculasProductores().imprimir());
-    }
 }

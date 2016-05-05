@@ -149,27 +149,4 @@ public class Lista<E> implements ILista<E> {
            return ultimo;
     }    
   
-    /*
-    public static void main(String[] args) {
-        
-        INodo nodoPrueba = new Nodo("hola1",1);
-        INodo nodoPrueba2 = new Nodo("hola2",2);
-        INodo nodoPrueba3 = new Nodo("hola3",3);
-        INodo nodoPrueba4 = new Nodo("hola5",5);
-
-        ILista listaPrueba = new Lista();
-        listaPrueba.insertar(nodoPrueba2);
-        listaPrueba.insertar(nodoPrueba);
-        listaPrueba.insertar(nodoPrueba3);
-        System.out.println(listaPrueba.imprimir(","));
-        listaPrueba.insertar(nodoPrueba4);
-        System.out.println(listaPrueba.imprimir(","));
-        //listaPrueba.eliminar(2);
-        //System.out.println(listaPrueba.imprimir(","));
-        //listaPrueba.eliminar(5);
-        //System.out.println(listaPrueba.imprimir(","));
-        listaPrueba.eliminar(1);
-        System.out.println(listaPrueba.imprimir(","));
-    }
-    */
 }
