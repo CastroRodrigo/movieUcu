@@ -11,6 +11,12 @@ import java.util.ArrayList;
 public interface IMovieUcuAdapter {
     
     /**
+     * Metodo que retorna una lista con los nombres de las peliculas
+     * @return ArrayList de Strings
+     */
+    public ArrayList<String> obtenerNombrePeliculas ();
+    
+    /**
      * Metodo que crea la lista de Peliculas
      * @see MovieUcuAdapter#listaPeliculas
      */

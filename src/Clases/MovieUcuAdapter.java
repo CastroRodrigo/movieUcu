@@ -78,6 +78,17 @@ public class MovieUcuAdapter implements IMovieUcuAdapter {
         }
         return nombres.toString();
     }
+    
+    public ArrayList<String> obtenerNombrePeliculas (){
+        ArrayList<String> nombres = new ArrayList();
+        INodo<IPelicula> aux = listaPeliculas.getPrimero();
+        while(aux!=null){
+            nombres.add(aux.getDato().getName());
+            aux=aux.getSiguiente();
+        }
+        return nombres;
+    }
+            
 
     @Override
     public IPelicula buscarPelicula(Comparable idPelicula) {
@@ -332,6 +343,8 @@ public class MovieUcuAdapter implements IMovieUcuAdapter {
         
         return listaBusquedas;
     }
+    
+    
 
     @Override
     public String obtenerInfoPelicula(String nombreExacto) {
