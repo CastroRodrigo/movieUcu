@@ -3,6 +3,7 @@ package Interfaces;
 
 import TAD.*;
 import Clases.*;
+import java.util.ArrayList;
 
 /**
  * @author Rodrigo Castro
@@ -158,6 +159,34 @@ public interface IMovieUcuAdapter {
      * o null si el id no existe o la lista esta vacia 
      */
     public IPelicula buscarPelicula (Comparable IdPelicula);
+    
+    /**
+     * Metod que busca entre los nombre de las peliculas uno o varios que contengan el nombre parametro
+     * @param nombre de tipo string
+     * @return Una lista con el/los nombres de las peliculas encontradas
+     */
+    public ArrayList<String> buscarPorNombre(String nombre);
+    
+    /**
+     * Metodo que busca las peliculas segun su año de estreno
+     * @param year de tipo int
+     * @return Una lista con el/los nombres de las peliculas de ese año
+     */
+    public ArrayList<String> buscarPorYear(int year);
+    
+    /**
+     * Metodo que busca las peliculas segun su genero
+     * @param genero de tipo String
+     * @return Una lista con el/los nombres de las peliculas de ese genero
+     */
+    public ArrayList<String> buscarPorGenero(String genero);
+    
+    /**
+     * Metodo que devuelve toda la informacion relacionada con una pelicula en concreto
+     * @param nombreExacto de tipo string
+     * @return Un String con toda la informacion ej: id, nombre, actores, etc.
+     */
+    public String obtenerInfoPelicula(String nombreExacto);
     
     
 }

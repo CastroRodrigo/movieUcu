@@ -28,6 +28,8 @@ public class MovieUcuAdapter implements IMovieUcuAdapter {
     Lista<Relacion> listaPeliculasActores;
     Lista<Relacion> listaPeliculasDirectores;
     Lista<Relacion> listaPeliculasProductores;
+    ArrayList<String> listaBusquedas;
+    StringBuilder infoPelicula;
     String textoProductores = "src/Files/Small-Productores.txt";
     String textoDirectores = "src/Files/Small-Directores.txt" ;
     String textoActores = "src/Files/Small-Actores.txt";
@@ -90,6 +92,8 @@ public class MovieUcuAdapter implements IMovieUcuAdapter {
         }
         throw new NullPointerException("La id buscada no existe");
     }
+    
+    
 
     @Override
     public void crearListaPeliculas() {
@@ -279,26 +283,163 @@ public class MovieUcuAdapter implements IMovieUcuAdapter {
         } 
     }
     
+
+    @Override
+    public ArrayList<String> buscarPorNombre(String nombre) {
+        listaBusquedas = new ArrayList();
+        INodo<IPelicula> aux = listaPeliculas.getPrimero();
+        while(aux!=null){
+            if(aux.getDato().getName().toLowerCase().contains(nombre.toLowerCase())){
+                listaBusquedas.add(aux.getDato().getName());
+                aux = aux.getSiguiente();
+            }
+            else {
+                aux=aux.getSiguiente();
+            }
+        }
+        return listaBusquedas;
+    }
+
+    @Override
+    public ArrayList<String> buscarPorYear(int year) {
+        listaBusquedas = new ArrayList();
+        INodo<IPelicula> aux = listaPeliculas.getPrimero();
+        while (aux!=null){
+            if(aux.getDato().getYear()== year){
+                listaBusquedas.add(aux.getDato().getName());
+                aux = aux.getSiguiente();
+            }
+            else {
+                aux=aux.getSiguiente();
+            }
+        }
+        return listaBusquedas;
+    }
+
+    @Override
+    public ArrayList<String> buscarPorGenero(String genero) {
+        listaBusquedas = new ArrayList();
+        INodo<IPelicula> aux = listaPeliculas.getPrimero();
+        while(aux!= null){
+            if(aux.getDato().getGenre().toLowerCase().contains(genero.toLowerCase())){
+                listaBusquedas.add(aux.getDato().getName());
+                aux= aux.getSiguiente();
+            }
+            else{
+                aux=aux.getSiguiente();
+            }
+        }
+        
+        return listaBusquedas;
+    }
+
+    @Override
+    public String obtenerInfoPelicula(String nombreExacto) {
+        infoPelicula = new StringBuilder();
+        INodo<IPelicula> aux = listaPeliculas.getPrimero();
+        Comparable id = aux.getDato().getId();
+        while(aux!=null){
+            if(aux.getDato().getName().equals(nombreExacto)){
+                id = aux.getDato().getId();
+                infoPelicula.append("IDENTIFICADOR: ").append(aux.getDato().getId().toString()).append("\n");
+                infoPelicula.append("NOMBRE: ").append(aux.getDato().getName()).append("\n");
+                infoPelicula.append("PUNTUACION: ").append(aux.getDato().getPuntuation()).append("\n");
+                infoPelicula.append("AÑO: ").append(aux.getDato().getYear()).append("\n");
+                infoPelicula.append("RESEÑA:\n").append(aux.getDato().getReview()).append("\n");
+                infoPelicula.append("GENERO:\n").append(aux.getDato().getGenre()).append("\n");
+                break;
+            }
+            else{
+                aux=aux.getSiguiente();
+            }
+        }
+        infoPelicula.append("\nACTORES: ").append("\n");
+        INodo<Relacion> auxPeliAct = listaPeliculasActores.getPrimero();
+        while (auxPeliAct!= null){
+            if(auxPeliAct.getDato().getIdPelicula().equals(id)){
+                Comparable idActor = auxPeliAct.getDato().getId();
+                INodo<IActor> auxAct = listaActores.getPrimero();
+                while(auxAct!= null){
+                    if(auxAct.getDato().getId().equals(idActor)){
+                        infoPelicula.append(auxAct.getDato().getName()).append("\n");
+                        break;                        
+                    }
+                    auxAct=auxAct.getSiguiente();
+                }
+                auxPeliAct=auxPeliAct.getSiguiente();
+            }
+            auxPeliAct=auxPeliAct.getSiguiente();
+        }
+        infoPelicula.append("\nDIRECTORES: ").append("\n");
+        INodo<Relacion> auxPeliDire = listaPeliculasDirectores.getPrimero();
+        while (auxPeliDire!= null){
+            if(auxPeliDire.getDato().getIdPelicula().equals(id)){
+                Comparable idDirector = auxPeliDire.getDato().getId();
+                INodo<IDirector> auxDire = listaDirectores.getPrimero();
+                while(auxDire!= null){
+                    if(auxDire.getDato().getId().equals(idDirector)){
+                        infoPelicula.append(auxDire.getDato().getName()).append("\n");
+                        break;                        
+                    }
+                    auxDire=auxDire.getSiguiente();
+                }
+                auxPeliDire=auxPeliDire.getSiguiente();
+            }
+            auxPeliDire=auxPeliDire.getSiguiente();
+        }
+        infoPelicula.append("\nPRODUCTORES: ").append("\n");
+        INodo<Relacion> auxPeliPro = listaPeliculasProductores.getPrimero();
+        while (auxPeliPro!= null){
+            if(auxPeliPro.getDato().getIdPelicula().equals(id)){
+                Comparable idProductor = auxPeliPro.getDato().getId();
+                INodo<IProductor> auxPro = listaProductores.getPrimero();
+                while(auxPro!= null){
+                    if(auxPro.getDato().getId().equals(idProductor)){
+                        infoPelicula.append(auxPro.getDato().getName()).append("\n");
+                        break;                        
+                    }
+                    auxPro=auxPro.getSiguiente();
+                }
+                auxPeliPro=auxPeliPro.getSiguiente();
+            }
+            auxPeliPro=auxPeliPro.getSiguiente();
+        }
+        
+        
+        
+        return infoPelicula.toString();
+    }
     
     public static void main(String[] args) {
         
         IMovieUcuAdapter adapter = new MovieUcuAdapter();
         adapter.crearListaPeliculas();
-        System.out.println(adapter.imprimirPeliculas());
+        adapter.crearListaActores();
+        adapter.crearListaDirectores();
+        adapter.crearListaProductores();
+        adapter.crearListaPeliculasActores();
+        adapter.crearListaPeliculasDirectores();
+        adapter.crearListaPeliculasActores();
+        adapter.crearListaPeliculasProductores();
+        System.out.println(adapter.obtenerInfoPelicula("Thor"));
+        System.out.println(adapter.obtenerInfoPelicula("Jurassic World"));
+        System.out.println(adapter.obtenerInfoPelicula("Deadpool"));
+        System.out.println(adapter.obtenerInfoPelicula("Terminator Genisys"));
+
+        //System.out.println(adapter.buscarPorNombre("45656788").toString());
+        //System.out.println(adapter.buscarPorNombre("iron").toString());
+        //System.out.println(adapter.buscarPorYear(2010).toString());
+        //System.out.println(adapter.buscarPorGenero("fiction").toString());
+        //System.out.println(adapter.buscarPorGenero("drama").toString());
+        //System.out.println(adapter.imprimirPeliculas());
         //System.out.println(adapter.buscarPelicula(262500).getName());
         //System.out.println(adapter.getListPelicula().imprimir());
-        //adapter.crearListaActores();
+        
         //System.out.println(adapter.getListActores().imprimir());
-        //adapter.crearListaDirectores();
         //System.out.println(adapter.getListDirectores().imprimir());
-        //adapter.crearListaPeliculasActores();
         //System.out.println(adapter.getPeliculasActores().imprimir());
-        adapter.crearListaPeliculasDirectores();
         //System.out.println(adapter.getPeliculasDirectores().imprimir());
-        adapter.crearListaPeliculasActores();
         //System.out.println(adapter.getPeliculasActores().imprimir());
-        adapter.crearListaPeliculasProductores();
         //System.out.println(adapter.getPeliculasProductores().imprimir());
     }
-    
 }
