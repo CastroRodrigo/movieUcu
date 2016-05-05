@@ -30,13 +30,13 @@ public class MovieUcuAdapter implements IMovieUcuAdapter {
     Lista<Relacion> listaPeliculasProductores;
     ArrayList<String> listaBusquedas;
     StringBuilder infoPelicula;
-    String textoProductores = "src/Files/Small-Productores.txt";
-    String textoDirectores = "src/Files/Small-Directores.txt" ;
-    String textoActores = "src/Files/Small-Actores.txt";
-    String textoPelicula = "src/Files/Small-Peliculas.txt";
-    String textoPeliculasActores = "src/Files/Small-PeliculasActores.txt";
-    String textoPeliculasDirectores = "src/Files/Small-PeliculasDirectores.txt";
-    String textoPeliculasProductores = "src/Files/Small-PeliculasProductores.txt";
+    String textoProductores = "src/Files/Big-Productores.csv";
+    String textoDirectores = "src/Files/Big-Directores.csv" ;
+    String textoActores = "src/Files/Big-Actores.csv";
+    String textoPelicula = "src/Files/Big-Peliculas.csv";
+    String textoPeliculasActores = "src/Files/Big-PeliculasActores.csv";
+    String textoPeliculasDirectores = "src/Files/Big-PeliculasDirectores.csv";
+    String textoPeliculasProductores = "src/Files/Big-PeliculasProductores.csv";
     
     @Override
     public Lista getListPelicula() {
@@ -110,9 +110,15 @@ public class MovieUcuAdapter implements IMovieUcuAdapter {
     public void crearListaPeliculas() {
         String[] lineas = ManejadorArchivosGenerico.leerArchivo(textoPelicula, false);
         for(int linea=0;linea<lineas.length;linea++){
-            String[] datos = lineas[linea].split("\\|");
-            IPelicula peli = new Pelicula(Integer.parseInt(datos[0]),datos[1],Integer.parseInt(datos[2]),Float.parseFloat(datos[3]),datos[4],datos[5]);
-            this.agregarPelicula(peli);
+            try{
+                String[] datos = lineas[linea].split("\\|");
+                IPelicula peli = new Pelicula(Integer.parseInt(datos[0]),datos[1],Integer.parseInt(datos[2]),Float.parseFloat(datos[3]),datos[4],datos[5]);
+                System.out.println(peli.getName());
+                this.agregarPelicula(peli);
+            }
+            catch(IndexOutOfBoundsException ex){
+                System.out.println("No se pudieron agregar algunas peliculas" + ex.getMessage());
+            }
         }
     }
 
@@ -192,9 +198,15 @@ public class MovieUcuAdapter implements IMovieUcuAdapter {
     public void crearListaActores() {
         String[] lineas = ManejadorArchivosGenerico.leerArchivo(textoActores, false);
         for(int linea=0;linea<lineas.length;linea++){
-            String[] datos = lineas[linea].split("\\|");
-            IActor act = new Actor(Integer.parseInt(datos[0]),datos[1]);
-            this.agregarActor(act);
+            try{
+                String[] datos = lineas[linea].split("\\|");
+                IActor act = new Actor(Integer.parseInt(datos[0]),datos[1]);
+                this.agregarActor(act);
+            }
+            catch(IndexOutOfBoundsException ex){
+                System.out.println("No se pudieron agregar algunas peliculas" + ex.getMessage());
+            }
+            
         }
         
         
@@ -204,9 +216,14 @@ public class MovieUcuAdapter implements IMovieUcuAdapter {
     public void crearListaDirectores() {
         String[] lineas = ManejadorArchivosGenerico.leerArchivo(textoDirectores, false);
         for(int linea=0; linea<lineas.length;linea++){
-           String[] datos = lineas[linea].split("\\|");
-           IDirector dir = new Director(Integer.parseInt(datos[0]),datos[1]);
-           this.agregarDiretor(dir);
+            try{
+                String[] datos = lineas[linea].split("\\|");
+                IDirector dir = new Director(Integer.parseInt(datos[0]),datos[1]);
+                this.agregarDiretor(dir);
+            }
+            catch(IndexOutOfBoundsException ex){
+                System.out.println("No se pudieron agregar algunos Drectores" + ex.getMessage());
+            }
         }
     }
 
@@ -214,9 +231,14 @@ public class MovieUcuAdapter implements IMovieUcuAdapter {
     public void crearListaProductores() {
         String[] lineas = ManejadorArchivosGenerico.leerArchivo(textoProductores, false);
         for(int linea=0; linea<lineas.length;linea++){
-            String[] datos = lineas[linea].split("\\|");
-            IProductor pro = new Productor(Integer.parseInt(datos[0]),datos[1]);
-            this.agregarProductor(pro);
+            try{
+                String[] datos = lineas[linea].split("\\|");
+                IProductor pro = new Productor(Integer.parseInt(datos[0]),datos[1]);
+                this.agregarProductor(pro);
+            }
+            catch(IndexOutOfBoundsException ex){
+                System.out.println("No se pudieron agregar algunas Productores" + ex.getMessage());
+            }
         }
     }
 
@@ -224,9 +246,14 @@ public class MovieUcuAdapter implements IMovieUcuAdapter {
     public void crearListaPeliculasActores() {
         String[] lineas = ManejadorArchivosGenerico.leerArchivo(textoPeliculasActores, false);
         for(int linea=0; linea<lineas.length;linea++){
-            String[] datos = lineas[linea].split("\\|");
-            Relacion peliActor = new Relacion(Integer.parseInt(datos[0]),Integer.parseInt(datos[1]));
-            this.agregarRelacionPeliActor(peliActor);
+            try{
+                String[] datos = lineas[linea].split("\\|");
+                Relacion peliActor = new Relacion(Integer.parseInt(datos[0]),Integer.parseInt(datos[1]));
+                this.agregarRelacionPeliActor(peliActor);
+            }
+            catch(IndexOutOfBoundsException ex){
+                System.out.println("No se pudieron agregar algunas relaciones" + ex.getMessage());
+            }
         }
     }
 
@@ -234,9 +261,14 @@ public class MovieUcuAdapter implements IMovieUcuAdapter {
     public void crearListaPeliculasDirectores() {
         String[] lineas = ManejadorArchivosGenerico.leerArchivo(textoPeliculasDirectores, false);
         for(int linea=0; linea<lineas.length;linea++){
-            String[] datos = lineas[linea].split("\\|");
-            Relacion peliDire = new Relacion(Integer.parseInt(datos[0]),Integer.parseInt(datos[1]));
-            this.agregarRelacionPeliDire(peliDire);
+            try{
+                String[] datos = lineas[linea].split("\\|");
+                Relacion peliDire = new Relacion(Integer.parseInt(datos[0]),Integer.parseInt(datos[1]));
+                this.agregarRelacionPeliDire(peliDire);
+            }
+            catch(IndexOutOfBoundsException ex){
+                System.out.println("No se pudieron agregar algunas relaciones" + ex.getMessage());
+            }
         }
     }
 
@@ -244,9 +276,14 @@ public class MovieUcuAdapter implements IMovieUcuAdapter {
     public void crearListaPeliculasProductores() {
         String[] lineas = ManejadorArchivosGenerico.leerArchivo(textoPeliculasProductores, false);
         for(int linea=0; linea<lineas.length;linea++){
-            String[] datos = lineas[linea].split("\\|");
-            Relacion peliPro = new Relacion(Integer.parseInt(datos[0]),Integer.parseInt(datos[1]));
-            this.agregarRelacionPeliPro(peliPro);
+            try{
+                String[] datos = lineas[linea].split("\\|");
+                Relacion peliPro = new Relacion(Integer.parseInt(datos[0]),Integer.parseInt(datos[1]));
+                this.agregarRelacionPeliPro(peliPro);
+            }
+            catch(IndexOutOfBoundsException ex){
+                System.out.println("No se pudieron agregar algunas relaciones" + ex.getMessage());
+            }
         }
     }
 
@@ -419,12 +456,12 @@ public class MovieUcuAdapter implements IMovieUcuAdapter {
     
     public static void main(String[] args) {
         
-        //IMovieUcuAdapter adapter = new MovieUcuAdapter();
-        //adapter.crearListaPeliculas();
-        //adapter.crearListaActores();
-        //adapter.crearListaDirectores();
-        //adapter.crearListaProductores();
-        //adapter.crearListaPeliculasActores();
+        IMovieUcuAdapter adapter = new MovieUcuAdapter();
+        adapter.crearListaPeliculas();
+        adapter.crearListaActores();
+        adapter.crearListaDirectores();
+        adapter.crearListaProductores();
+        adapter.crearListaPeliculasActores();
         //System.out.println(adapter.getPeliculasActores().imprimir());
         //adapter.crearListaPeliculasDirectores();
         //adapter.crearListaPeliculasActores();

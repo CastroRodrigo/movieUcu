@@ -65,6 +65,7 @@ public class MovieUcuFrame extends javax.swing.JFrame {
         jScrollPane1.setViewportView(jListPeliculas);
 
         jTextAreaInfoPelicula.setColumns(20);
+        jTextAreaInfoPelicula.setLineWrap(true);
         jTextAreaInfoPelicula.setRows(5);
         jScrollPane2.setViewportView(jTextAreaInfoPelicula);
 
