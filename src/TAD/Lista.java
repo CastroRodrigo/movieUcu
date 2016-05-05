@@ -1,8 +1,6 @@
 
 package TAD;
 
-import sun.applet.Main;
-
 /**
  * @author Rodrigo Castro
  */
