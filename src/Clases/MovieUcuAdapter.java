@@ -284,6 +284,7 @@ public class MovieUcuAdapter implements IMovieUcuAdapter {
             catch(IndexOutOfBoundsException ex){
                 System.out.println("No se pudieron agregar algunas relaciones" + ex.getMessage());
             }
+            
         }
     }
 
