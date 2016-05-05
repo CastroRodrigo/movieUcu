@@ -148,7 +148,6 @@ public class MovieUcuFrame extends javax.swing.JFrame {
         adapter.crearListaProductores();
         adapter.crearListaPeliculasActores();
         adapter.crearListaPeliculasDirectores();
-        adapter.crearListaPeliculasActores();
         adapter.crearListaPeliculasProductores();
         DefaultListModel model = new DefaultListModel();
         ArrayList<String> peliculas = adapter.obtenerNombrePeliculas();
@@ -182,16 +181,26 @@ public class MovieUcuFrame extends javax.swing.JFrame {
         else if(jComboBoxOpciones.getSelectedItem().toString().equals("Año")){
             try {
                 int yearBuscar= Integer.parseInt(jTextFieldBusqueda.getText());
-            ArrayList<String> listaResultados = adapter.buscarPorYear(yearBuscar);
+                ArrayList<String> listaResultados = adapter.buscarPorYear(yearBuscar);
+                DefaultListModel model = new DefaultListModel();
+                for(int i=0;i<listaResultados.size();i++){
+                    model.addElement(listaResultados.get(i));
+                }
+                jListPeliculas.setModel(model);
+            }
+            catch (NumberFormatException e){
+               JOptionPane.showMessageDialog(null, "Esta buscando por año. Ingrese numeros!!!");
+            }
+            
+        }
+        else if(jComboBoxOpciones.getSelectedItem().toString().equals("Genero")){
+            String generoABuscar = jTextFieldBusqueda.getText();
+            ArrayList<String> listaResultados = adapter.buscarPorGenero(generoABuscar);
             DefaultListModel model = new DefaultListModel();
             for(int i=0;i<listaResultados.size();i++){
                 model.addElement(listaResultados.get(i));
             }
-            jListPeliculas.setModel(model);
-            }
-            catch (NumberFormatException e){
-               JOptionPane.showMessageDialog(null, "Esta buscando por años, ingrese numeros");
-            }
+            jListPeliculas.setModel(model); 
             
         }
         

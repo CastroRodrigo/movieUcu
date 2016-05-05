@@ -374,15 +374,14 @@ public class MovieUcuAdapter implements IMovieUcuAdapter {
                 INodo<IActor> auxAct = listaActores.getPrimero();
                 while(auxAct!= null){
                     if(auxAct.getDato().getId().equals(idActor)){
-                        infoPelicula.append(auxAct.getDato().getName()).append("\n");
-                        break;                        
+                        infoPelicula.append(auxAct.getDato().getName()).append("\n"); 
                     }
                     auxAct=auxAct.getSiguiente();
                 }
-                auxPeliAct=auxPeliAct.getSiguiente();
             }
             auxPeliAct=auxPeliAct.getSiguiente();
         }
+        
         infoPelicula.append("\nDIRECTORES: ").append("\n");
         INodo<Relacion> auxPeliDire = listaPeliculasDirectores.getPrimero();
         while (auxPeliDire!= null){
@@ -391,12 +390,10 @@ public class MovieUcuAdapter implements IMovieUcuAdapter {
                 INodo<IDirector> auxDire = listaDirectores.getPrimero();
                 while(auxDire!= null){
                     if(auxDire.getDato().getId().equals(idDirector)){
-                        infoPelicula.append(auxDire.getDato().getName()).append("\n");
-                        break;                        
+                        infoPelicula.append(auxDire.getDato().getName()).append("\n");                   
                     }
                     auxDire=auxDire.getSiguiente();
                 }
-                auxPeliDire=auxPeliDire.getSiguiente();
             }
             auxPeliDire=auxPeliDire.getSiguiente();
         }
@@ -409,35 +406,33 @@ public class MovieUcuAdapter implements IMovieUcuAdapter {
                 while(auxPro!= null){
                     if(auxPro.getDato().getId().equals(idProductor)){
                         infoPelicula.append(auxPro.getDato().getName()).append("\n");
-                        break;                        
                     }
                     auxPro=auxPro.getSiguiente();
                 }
-                auxPeliPro=auxPeliPro.getSiguiente();
             }
             auxPeliPro=auxPeliPro.getSiguiente();
-        }
-        
-        
+            
+        } 
         
         return infoPelicula.toString();
     }
     
     public static void main(String[] args) {
         
-        IMovieUcuAdapter adapter = new MovieUcuAdapter();
-        adapter.crearListaPeliculas();
-        adapter.crearListaActores();
-        adapter.crearListaDirectores();
-        adapter.crearListaProductores();
-        adapter.crearListaPeliculasActores();
-        adapter.crearListaPeliculasDirectores();
-        adapter.crearListaPeliculasActores();
-        adapter.crearListaPeliculasProductores();
-        System.out.println(adapter.obtenerInfoPelicula("Thor"));
-        System.out.println(adapter.obtenerInfoPelicula("Jurassic World"));
-        System.out.println(adapter.obtenerInfoPelicula("Deadpool"));
-        System.out.println(adapter.obtenerInfoPelicula("Terminator Genisys"));
+        //IMovieUcuAdapter adapter = new MovieUcuAdapter();
+        //adapter.crearListaPeliculas();
+        //adapter.crearListaActores();
+        //adapter.crearListaDirectores();
+        //adapter.crearListaProductores();
+        //adapter.crearListaPeliculasActores();
+        //System.out.println(adapter.getPeliculasActores().imprimir());
+        //adapter.crearListaPeliculasDirectores();
+        //adapter.crearListaPeliculasActores();
+        //adapter.crearListaPeliculasProductores();
+        //System.out.println(adapter.obtenerInfoPelicula("Thor"));
+        //System.out.println(adapter.obtenerInfoPelicula("Jurassic World"));
+        //System.out.println(adapter.obtenerInfoPelicula("Deadpool"));
+        //System.out.println(adapter.obtenerInfoPelicula("Terminator Genisys"));
 
         //System.out.println(adapter.buscarPorNombre("45656788").toString());
         //System.out.println(adapter.buscarPorNombre("iron").toString());
