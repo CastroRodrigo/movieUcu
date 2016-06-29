@@ -7,6 +7,9 @@ import Interfaces.IMovieUcuAdapter;
 import Interfaces.IPelicula;
 import Interfaces.IProductor;
 import TAD.Lista;
+import TAD.ArbolBB;
+import TAD.IArbolBB;
+import TAD.ElementoAB;
 import java.util.ArrayList;
 
 /**
@@ -14,6 +17,26 @@ import java.util.ArrayList;
  */
 public class Adapter implements IMovieUcuAdapter {
 
+    IArbolBB<IActor> arbolActores;
+    IArbolBB<IPelicula> arbolPeliculas;
+    IArbolBB<IDirector> arbolDirectores;
+    IArbolBB<IProductor> arbolProductores;
+    IArbolBB<Relacion> arbolPeliculasActores;
+    IArbolBB<Relacion> arbolPeliculasDirectores;
+    IArbolBB<Relacion> arbolPeliculasProductores;
+    ArrayList<String> listaBusquedas;
+    StringBuilder infoPelicula;
+    String textoProductores = "src/Files/Big-Productores.csv";
+    String textoDirectores = "src/Files/Big-Directores.csv" ;
+    String textoActores = "src/Files/Big-Actores.csv";
+    String textoPelicula = "src/Files/Big-Peliculas.csv";
+    String textoPeliculasActores = "src/Files/Big-PeliculasActores.csv";
+    String textoPeliculasDirectores = "src/Files/Big-PeliculasDirectores.csv";
+    String textoPeliculasProductores = "src/Files/Big-PeliculasProductores.csv";
+    
+    
+    
+    
     @Override
     public ArrayList<String> obtenerNombrePeliculas() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
