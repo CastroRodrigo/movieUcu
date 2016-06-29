@@ -56,52 +56,6 @@ public interface IMovieUcuAdapter {
      */
     public void crearListaPeliculasProductores();
     
-    
-    /**
-     * Metodo que retorna una lista de pelicualas
-     * @return Lista de tipo IPelicula
-     */
-    public Lista<IPelicula> getListPelicula();
-    
-    /**
-     * Metodo que retorna una lista de Actores 
-     * @return Lista de tipo IActores
-     */
-    public Lista<IActor> getListActores();
-    
-    /**
-     * Metodo que retorna una lista de Directores
-     * @return Lista de tipo IDirector
-     */
-    public Lista<IDirector> getListDirectores();
-    
-    /**
-     * Metodo que retorna una lista de Productores
-     * @return Lista de tipo IProductor
-     */
-    public Lista<IProductor> getListProductores();
-    
-    /**
-     * Metodo que retorna una lista que contiene los id de los actores
-     * y los id de las peliculas donde estos trabajaron
-     * @return Lista de tipo Relacion
-     */
-    public Lista<Relacion> getPeliculasActores();
-    
-    /**
-     * Metodo que retorna una lista que contiene los id de los directores
-     * y los id de las peliculas donde estos trabajaron 
-     * @return Lista de tipo Relacion 
-     */
-    public Lista<Relacion> getPeliculasDirectores();
-    
-    /**
-     * Metodo que retorna una lista que contiene los id de los productores
-     * y los id de las peliculas donde estos trabajaron
-     * @return Lista de tipo Relacion
-     */
-    public Lista<Relacion> getPeliculasProductores();
-    
     /**
      * Metdo que agrega una pelicula a la lista de peliculas
      * @param pelicula de tipo IPelicula

@@ -38,7 +38,6 @@ public class MovieUcuAdapter implements IMovieUcuAdapter {
     String textoPeliculasDirectores = "src/Files/Big-PeliculasDirectores.csv";
     String textoPeliculasProductores = "src/Files/Big-PeliculasProductores.csv";
     
-    @Override
     public Lista getListPelicula() {
         return listaPeliculas;
     }
@@ -121,32 +120,26 @@ public class MovieUcuAdapter implements IMovieUcuAdapter {
         }
     }
 
-    @Override
     public Lista<IActor> getListActores() {
         return listaActores;
     }
 
-    @Override
     public Lista<IDirector> getListDirectores() {
         return listaDirectores;
     }
 
-    @Override
     public Lista<IProductor> getListProductores() {
         return listaProductores;
     }
 
-    @Override
     public Lista<Relacion> getPeliculasActores() {
         return listaPeliculasActores;
     }
 
-    @Override
     public Lista<Relacion> getPeliculasDirectores() {
         return listaPeliculasDirectores;
     }
 
-    @Override
     public Lista<Relacion> getPeliculasProductores() {
         return listaPeliculasProductores;
     }
