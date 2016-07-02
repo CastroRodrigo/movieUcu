@@ -17,27 +17,27 @@ public interface IMovieUcuAdapter {
     public ArrayList<String> obtenerNombrePeliculas ();
     
     /**
-     * Metodo que crea la lista de Peliculas
+     * Metodo que crea la lista/ Arbol peliculas
      * @see MovieUcuAdapter#listaPeliculas
      */
-    public void crearListaPeliculas();
+    public void crearAlmacenPeliculas();
     /**
-     * Metodo que crea la lista de Actores
+     * Metodo que crea la lista/ Arbol de Actores
      * @see MovieUcuAdapter#listaActores
      */
-    public void crearListaActores();
+    public void crearAlmacenActores();
     
     /**
-     * Metodo que crea la lista de Directores
+     * Metodo que crea la lista/ Arbol de Directores
      * @see MovieUcuAdapter#listaDirectores
      */
-    public void crearListaDirectores();
+    public void crearAlmacenDirectores();
     
     /**
-     * Metodo que crea la lista de Productores
+     * Metodo que crea la lista/ Arbol de Productores
      * @see MovieUcuAdapter#listaProductores
      */
-    public void crearListaProductores();
+    public void crearAlmacenProductores();
     
     /**
      * Metodo que crea la lista los actores segun las pelculas que actuaron
@@ -57,49 +57,49 @@ public interface IMovieUcuAdapter {
     public void crearListaPeliculasProductores();
     
     /**
-     * Metdo que agrega una pelicula a la lista de peliculas
+     * Metdo que agrega una pelicula a la lista/arbol de peliculas
      * @param pelicula de tipo IPelicula
      */
     public void agregarPelicula(IPelicula pelicula);
     
     /**
-     * Metodo que agrega un actor a la liste de actores 
+     * Metodo que agrega un actor a la lista/arbol de actores 
      * @param actor de tipo IActor
      */
     public void agregarActor(IActor actor);
     
     /**
-     * Metodo que agrega un director a la lista de directores 
+     * Metodo que agrega un director a la lista/arbol de directores 
      * @param director de tipo IDirector 
      */
     public void agregarDiretor(IDirector director);
     
     /**
-     * Metodo que agrega un productor a la lista de productores
+     * Metodo que agrega un productor a la lista/arbol de productores
      * @param productor de tipo IProductor
      */
     public void agregarProductor (IProductor productor);
     
     /**
-     * Metodo que agrega un element relacion a la lista
+     * Metodo que agrega un element relacion a la lista/arbol
      * @param relacion de tipo Relacion
      */
     public void agregarRelacionPeliActor (Relacion relacion);
     
     /**
-     * Metodo que agrega un element relacion a la lista
+     * Metodo que agrega un element relacion a la lista/arbol
      * @param relacion de tipo Relacion
      */
     public void agregarRelacionPeliDire (Relacion relacion);
     
     /**
-     * Metodo que agrega un element relacion a la lista
+     * Metodo que agrega un element relacion a la lista/arbol
      * @param relacion de tipo Relacion
      */
     public void agregarRelacionPeliPro (Relacion relacion);
     
     /**
-     * Metodo que elimina una pelicula de la lista de peliculas 
+     * Metodo que elimina una pelicula de la lista/arbol de peliculas 
      * @param idPelicula Es el id de la pelicula de tipo Comparable
      * @return retorna true si la pelicula existe y fue
      * eliminada y false si la lista esta vacia 
@@ -108,7 +108,7 @@ public interface IMovieUcuAdapter {
     public boolean eliminarPelicula(Comparable idPelicula);
     
     /**
-     * Imprime los nobres de todas las peliculas de la lista
+     * Imprime los nobres de todas las peliculas de la lista/arbol
      * @return String de todos los nombres de las pelculas
      */
     public String imprimirPeliculas();

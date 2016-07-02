@@ -8,8 +8,6 @@ import Interfaces.IPelicula;
 import Interfaces.IProductor;
 import TAD.Lista;
 import TAD.ArbolBB;
-import TAD.IArbolBB;
-import TAD.ElementoAB;
 import java.util.ArrayList;
 
 /**
@@ -17,13 +15,13 @@ import java.util.ArrayList;
  */
 public class Adapter implements IMovieUcuAdapter {
 
-    IArbolBB<IActor> arbolActores;
-    IArbolBB<IPelicula> arbolPeliculas;
-    IArbolBB<IDirector> arbolDirectores;
-    IArbolBB<IProductor> arbolProductores;
-    IArbolBB<Relacion> arbolPeliculasActores;
-    IArbolBB<Relacion> arbolPeliculasDirectores;
-    IArbolBB<Relacion> arbolPeliculasProductores;
+    ArbolBB<IActor> arbolActores;
+    ArbolBB<IPelicula> arbolPeliculas;
+    ArbolBB<IDirector> arbolDirectores;
+    ArbolBB<IProductor> arbolProductores;
+    Lista<Relacion> listaPeliculasActores;
+    Lista<Relacion> listaPeliculasDirectores;
+    Lista<Relacion> listaPeliculasProductores;
     ArrayList<String> listaBusquedas;
     StringBuilder infoPelicula;
     String textoProductores = "src/Files/Big-Productores.csv";
@@ -42,39 +40,119 @@ public class Adapter implements IMovieUcuAdapter {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
+    /**
+     * Metodo Almacen que utiliza una estructura de arbol binario para almacenar las peliculas
+     */
     @Override
-    public void crearListaPeliculas() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void crearAlmacenPeliculas() {
+        String[] lineas = ManejadorArchivosGenerico.leerArchivo(textoPelicula, false);
+        for(int linea=0;linea<lineas.length;linea++){
+                String[] datos = lineas[linea].split("\\|",-1);
+                if(datos[2].compareTo("") == 0){
+                    datos[2]= "-1";
+                }
+                if(datos[3].compareTo("") == 0){
+                    datos[3]= "-1";
+                }
+                IPelicula peli = new Pelicula(Integer.parseInt(datos[0]),datos[1],Integer.parseInt(datos[2]),Float.parseFloat(datos[3]),datos[4],datos[5]);
+                this.agregarPelicula(peli);
+        }
     }
 
+    /**
+     * Metodo Almacen que utiliza una estructura de arbol binario para almacenar las actores
+     */
     @Override
-    public void crearListaActores() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void crearAlmacenActores() {
+        String[] lineas = ManejadorArchivosGenerico.leerArchivo(textoActores, false);
+        for(int linea=0;linea<lineas.length;linea++){
+                String[] datos = lineas[linea].split("\\|",-1);
+                if(datos[0].compareTo("") == 0){
+                    datos[0]= "-1";
+                }
+                IActor act = new Actor(Integer.parseInt(datos[0]),datos[1]);
+                this.agregarActor(act);
+            }
     }
 
+    /**
+     * Metodo Almacen que utiliza una estructura de arbol binario para almacenar las directores
+     */
     @Override
-    public void crearListaDirectores() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void crearAlmacenDirectores() {
+        String[] lineas = ManejadorArchivosGenerico.leerArchivo(textoDirectores, false);
+        for(int linea=0; linea<lineas.length;linea++){
+                String[] datos = lineas[linea].split("\\|",-1);
+                if(datos[0].compareTo("") == 0){
+                    datos[0]= "-1";
+                }
+                IDirector dir = new Director(Integer.parseInt(datos[0]),datos[1]);
+                this.agregarDiretor(dir);
+            }
     }
 
+    /**
+     * Metodo Almacen que utiliza una estructura de arbol binario para almacenar las productores
+     */
     @Override
-    public void crearListaProductores() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void crearAlmacenProductores() {
+        String[] lineas = ManejadorArchivosGenerico.leerArchivo(textoProductores, false);
+        for(int linea=0; linea<lineas.length;linea++){
+                String[] datos = lineas[linea].split("\\|",-1);
+                if(datos[0].compareTo("") == 0){
+                    datos[0]= "-1";
+                }
+                IProductor pro = new Productor(Integer.parseInt(datos[0]),datos[1]);
+                this.agregarProductor(pro);
+            }
     }
 
     @Override
     public void crearListaPeliculasActores() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        String[] lineas = ManejadorArchivosGenerico.leerArchivo(textoPeliculasActores, false);
+        for(int linea=0; linea<lineas.length;linea++){
+                String[] datos = lineas[linea].split("\\|",-1);
+                if(datos[0].compareTo("") == 0){
+                    datos[0]= "-1";
+                }
+                if (datos[1].compareTo("") == 0){
+                    datos[1] = "-1";
+                }
+                Relacion peliActor = new Relacion(Integer.parseInt(datos[0]),Integer.parseInt(datos[1]));
+                this.agregarRelacionPeliActor(peliActor);
+            }
     }
 
     @Override
     public void crearListaPeliculasDirectores() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        String[] lineas = ManejadorArchivosGenerico.leerArchivo(textoPeliculasDirectores, false);
+        for(int linea=0; linea<lineas.length;linea++){
+                String[] datos = lineas[linea].split("\\|",-1);
+                if(datos[0].compareTo("") == 0){
+                    datos[0]= "-1";
+                }
+                if (datos[1].compareTo("") == 0){
+                    datos[1] = "-1";
+                }
+                Relacion peliDire = new Relacion(Integer.parseInt(datos[0]),Integer.parseInt(datos[1]));
+                this.agregarRelacionPeliDire(peliDire);
+            }
     }
 
     @Override
     public void crearListaPeliculasProductores() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        String[] lineas = ManejadorArchivosGenerico.leerArchivo(textoPeliculasProductores, false);
+        for(int linea=0; linea<lineas.length;linea++){
+                String[] datos = lineas[linea].split("\\|",-1);
+                if(datos[0].compareTo("") == 0){
+                    datos[0]= "-1";
+                }
+                if (datos[1].compareTo("") == 0){
+                    datos[1] = "-1";
+                }
+                Relacion peliPro = new Relacion(Integer.parseInt(datos[0]),Integer.parseInt(datos[1]));
+                this.agregarRelacionPeliPro(peliPro);
+            }
     }
 
     @Override

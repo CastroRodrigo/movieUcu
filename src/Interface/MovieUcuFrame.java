@@ -143,10 +143,10 @@ public class MovieUcuFrame extends javax.swing.JFrame {
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         adapter = new MovieUcuAdapter();
-        adapter.crearListaPeliculas();
-        adapter.crearListaActores();
-        adapter.crearListaDirectores();
-        adapter.crearListaProductores();
+        adapter.crearAlmacenPeliculas();
+        adapter.crearAlmacenActores();
+        adapter.crearAlmacenDirectores();
+        adapter.crearAlmacenProductores();
         adapter.crearListaPeliculasActores();
         adapter.crearListaPeliculasDirectores();
         adapter.crearListaPeliculasProductores();

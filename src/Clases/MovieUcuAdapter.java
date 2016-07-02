@@ -106,7 +106,7 @@ public class MovieUcuAdapter implements IMovieUcuAdapter {
     
 
     @Override
-    public void crearListaPeliculas() {
+    public void crearAlmacenPeliculas() {
         String[] lineas = ManejadorArchivosGenerico.leerArchivo(textoPelicula, false);
         for(int linea=0;linea<lineas.length;linea++){
             try{
@@ -187,7 +187,7 @@ public class MovieUcuAdapter implements IMovieUcuAdapter {
     }
 
     @Override
-    public void crearListaActores() {
+    public void crearAlmacenActores() {
         String[] lineas = ManejadorArchivosGenerico.leerArchivo(textoActores, false);
         for(int linea=0;linea<lineas.length;linea++){
             try{
@@ -205,7 +205,7 @@ public class MovieUcuAdapter implements IMovieUcuAdapter {
     }
 
     @Override
-    public void crearListaDirectores() {
+    public void crearAlmacenDirectores() {
         String[] lineas = ManejadorArchivosGenerico.leerArchivo(textoDirectores, false);
         for(int linea=0; linea<lineas.length;linea++){
             try{
@@ -220,7 +220,7 @@ public class MovieUcuAdapter implements IMovieUcuAdapter {
     }
 
     @Override
-    public void crearListaProductores() {
+    public void crearAlmacenProductores() {
         String[] lineas = ManejadorArchivosGenerico.leerArchivo(textoProductores, false);
         for(int linea=0; linea<lineas.length;linea++){
             try{
