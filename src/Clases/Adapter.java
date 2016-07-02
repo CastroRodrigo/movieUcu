@@ -8,6 +8,10 @@ import Interfaces.IPelicula;
 import Interfaces.IProductor;
 import TAD.Lista;
 import TAD.ArbolBB;
+import TAD.ElementoAB;
+import TAD.IElementoAB;
+import TAD.INodo;
+import TAD.Nodo;
 import java.util.ArrayList;
 
 /**
@@ -157,37 +161,100 @@ public class Adapter implements IMovieUcuAdapter {
 
     @Override
     public void agregarPelicula(IPelicula pelicula) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        if(pelicula != null){
+            if(this.arbolPeliculas == null){
+                this.arbolPeliculas = new ArbolBB<>();
+            }
+            IElementoAB<IPelicula> nuevaPelicula = new ElementoAB (pelicula.getId(),pelicula);
+            this.arbolPeliculas.insertar(nuevaPelicula);
+        }
+        else{
+            throw new NullPointerException("La pelicula es null.");
+        }
     }
 
     @Override
     public void agregarActor(IActor actor) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        if (actor != null ){
+            if(this.arbolActores == null){
+                this.arbolActores = new ArbolBB<>();
+            }
+            IElementoAB<IActor> nuevoActor = new ElementoAB(actor.getId(), actor);
+            this.arbolActores.insertar(nuevoActor);
+        }
+        else{
+            throw new NullPointerException("El Actor es null."); 
+        }
     }
 
     @Override
     public void agregarDiretor(IDirector director) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        if (director != null ){
+            if(this.arbolDirectores == null){
+                this.arbolDirectores = new ArbolBB<>();
+            }
+            IElementoAB<IDirector> nuevoDirector = new ElementoAB(director.getId(), director);
+            this.arbolDirectores.insertar(nuevoDirector);
+        }
+        else{
+            throw new NullPointerException("El Director es null."); 
+        } 
     }
 
     @Override
     public void agregarProductor(IProductor productor) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        if (productor != null ){
+            if(this.arbolProductores == null){
+                this.arbolProductores = new ArbolBB<>();
+            }
+            IElementoAB<IProductor> nuevoProductor = new ElementoAB(productor.getId(),productor);
+            this.arbolProductores.insertar(nuevoProductor);
+        }
+        else{
+            throw new NullPointerException("El Productor es null."); 
+        } 
     }
 
     @Override
     public void agregarRelacionPeliActor(Relacion relacion) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        if (relacion != null ){
+            if(this.listaPeliculasActores == null){
+                this.listaPeliculasActores = new Lista<>();
+            }
+            INodo<Relacion> nuevaRelacion = new Nodo(relacion,relacion.getIdPelicula());
+            this.listaPeliculasActores.insertar(nuevaRelacion);
+        }
+        else{
+            throw new NullPointerException("La Relacion es null."); 
+        } 
     }
 
     @Override
     public void agregarRelacionPeliDire(Relacion relacion) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        if (relacion != null ){
+            if(this.listaPeliculasDirectores == null){
+                this.listaPeliculasDirectores = new Lista<>();
+            }
+            INodo<Relacion> nuevaRelacion = new Nodo(relacion,relacion.getIdPelicula());
+            this.listaPeliculasDirectores.insertar(nuevaRelacion);
+        }
+        else{
+            throw new NullPointerException("La Relacion es null."); 
+        } 
     }
 
     @Override
     public void agregarRelacionPeliPro(Relacion relacion) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        if (relacion != null ){
+            if(this.listaPeliculasProductores == null){
+                this.listaPeliculasProductores = new Lista<>();
+            }
+            INodo<Relacion> nuevaRelacion = new Nodo(relacion,relacion.getIdPelicula());
+            this.listaPeliculasProductores.insertar(nuevaRelacion);
+        }
+        else{
+            throw new NullPointerException("La Relacion es null."); 
+        } 
     }
 
     @Override
