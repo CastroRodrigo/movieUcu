@@ -336,17 +336,36 @@ public class Adapter  {
         }
         return resultado;
     }
+    
+    public ArrayList<IActor> obtenerReparto (Comparable idPelicula){
+        ArrayList<IActor> reparto = new ArrayList<>();
+        INodo<Relacion> auxPeliAct = listaPeliculasActores.getPrimero();
+        while (auxPeliAct!= null){
+            if(auxPeliAct.getDato().getIdPelicula().equals(idPelicula)){
+                IElementoAB<IActor> aux = arbolActores.buscar(auxPeliAct.getDato().getId());
+                reparto.add(aux.getDatos()); 
+                }
+            auxPeliAct=auxPeliAct.getSiguiente();
+        }
+        return reparto;
+    }
 
     public String obtenerInfoPelicula(String nombreExacto) {
         infoPelicula = new StringBuilder();
         ArrayList<IPelicula> pelicula = new ArrayList();
         buscarPorNombreExacto(nombreExacto, arbolPeliculas.getRaiz(),pelicula);
-        infoPelicula.append("IDENTIFICADOR: ").append(pelicula.get(0).getId().toString()).append("\n");
-        infoPelicula.append("NOMBRE: ").append(pelicula.get(0).getName()).append("\n");
-        infoPelicula.append("PUNTUACION: ").append(pelicula.get(0).getPuntuation()).append("\n");
-        infoPelicula.append("AÑO: ").append(pelicula.get(0).getYear()).append("\n");
-        infoPelicula.append("RESEÑA:\n").append(pelicula.get(0).getReview()).append("\n");
-        infoPelicula.append("GENERO:\n").append(pelicula.get(0).getGenre()).append("\n");
+        infoPelicula.append("IDENTIFICADOR: ").append(pelicula.get(0).getId().toString()).append("\n").append("\n");
+        infoPelicula.append("NOMBRE: ").append(pelicula.get(0).getName()).append("\n").append("\n");
+        infoPelicula.append("PUNTUACION: ").append(pelicula.get(0).getPuntuation()).append("\n").append("\n");
+        infoPelicula.append("AÑO: ").append(pelicula.get(0).getYear()).append("\n").append("\n");
+        infoPelicula.append("RESEÑA:\n").append(pelicula.get(0).getReview()).append("\n").append("\n");
+        infoPelicula.append("GENERO:\n").append(pelicula.get(0).getGenre()).append("\n").append("\n");
+        
+        ArrayList<IActor> reparto = obtenerReparto(pelicula.get(0).getId());
+        infoPelicula.append("\nACTORES: ").append("\n");
+        for (int i=0; i< reparto.size(); i++){
+            infoPelicula.append(reparto.get(i).getName()).append("\n");
+        }
        
         return infoPelicula.toString();
     }
