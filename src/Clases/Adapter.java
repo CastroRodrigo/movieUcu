@@ -36,10 +36,21 @@ public class Adapter  {
     String textoPeliculasProductores = "src/Files/Big-PeliculasProductores.csv";
     
     
-    public ArbolBB getArbolPeliculas(){
+    public ArbolBB<IPelicula> getArbolPeliculas(){
         return arbolPeliculas;
     }
     
+    public ArbolBB<IActor> getArbolActores(){
+        return arbolActores;
+    }
+    
+    public ArbolBB<IDirector> getArbolDirectores(){
+        return arbolDirectores;
+    }
+    
+    public ArbolBB<IProductor> getArbolProductores(){
+        return arbolProductores;
+    }
     
     public ArrayList<String> obtenerNombrePeliculas(IElementoAB<IPelicula> elemento, ArrayList<String> resultado) {
         if (elemento!= null){
@@ -53,7 +64,47 @@ public class Adapter  {
         }
         return resultado;
     }
+    
+    public ArrayList<String> obtenerNombreActores(IElementoAB<IActor> elemento, ArrayList<String> resultado){
+        if (elemento!= null){
+            resultado.add(elemento.getDatos().getName());
+            if(elemento.getHijoIzq()!= null){
+                obtenerNombreActores(elemento.getHijoIzq(),resultado);
+            }
+            if(elemento.getHijoDer()!= null){
+                obtenerNombreActores(elemento.getHijoDer(),resultado);
+            }
+        }
+        return resultado;
+    }
+    
+    public ArrayList<String> obtenerNombreProductores (IElementoAB<IProductor> elemento, ArrayList<String> resultado){
+        if(elemento != null){
+            resultado.add(elemento.getDatos().getName());
+            if(elemento.getHijoIzq()!= null){
+                obtenerNombreProductores(elemento.getHijoIzq(),resultado);
+            }
+            if(elemento.getHijoDer()!= null){
+                obtenerNombreProductores(elemento.getHijoDer(),resultado);
+            }
+        }
+        
+        return resultado;
+    }
 
+    public ArrayList<String> obtenerNombreDirectores( IElementoAB<IDirector> elemento, ArrayList<String> resultado){
+        if(elemento != null){
+            resultado.add(elemento.getDatos().getName());
+            if(elemento.getHijoIzq()!= null){
+                obtenerNombreDirectores(elemento.getHijoIzq(),resultado);
+            }
+            if(elemento.getHijoDer()!= null){
+                obtenerNombreDirectores(elemento.getHijoDer(),resultado);
+            }
+        }
+        
+        return resultado;
+    }
     /**
      * Metodo Almacen que utiliza una estructura de arbol binario para almacenar las peliculas
      */
@@ -274,7 +325,7 @@ public class Adapter  {
 
     public ArrayList<String> buscarPorNombre(String nombre, IElementoAB<IPelicula> elemento, ArrayList<String> resultado) {
         if (elemento!= null){
-            if( elemento.getDatos().getName().contains(nombre)){
+            if( elemento.getDatos().getName().toLowerCase().contains(nombre.toLowerCase())){
                 resultado.add(elemento.getDatos().getName());
             }
             if(elemento.getHijoIzq()!= null){
@@ -305,6 +356,21 @@ public class Adapter  {
         }
         return resultado;
     }
+    
+    public ArrayList<IActor> buscarActorPorNombreExacto (String nombreExacto, IElementoAB<IActor> elemento, ArrayList<IActor> resultado){
+        if(elemento != null){
+            if( elemento.getDatos().getName().contains(nombreExacto)){
+                resultado.add(elemento.getDatos());
+            }
+            if(elemento.getHijoIzq()!= null){
+                buscarActorPorNombreExacto(nombreExacto, elemento.getHijoIzq(), resultado);
+            }
+            if(elemento.getHijoDer()!=null){
+                buscarActorPorNombreExacto(nombreExacto, elemento.getHijoDer(), resultado);
+            }
+        }
+        return resultado;
+    }
 
     public ArrayList<String> buscarPorYear(int year, IElementoAB<IPelicula> elemento, ArrayList<String> resultado) {
         if (elemento!= null){
@@ -324,7 +390,7 @@ public class Adapter  {
 
     public ArrayList<String> buscarPorGenero(String genero, IElementoAB<IPelicula> elemento, ArrayList<String> resultado) {
         if (elemento!= null){
-            if( elemento.getDatos().getGenre().contains(genero)){
+            if( elemento.getDatos().getGenre().toLowerCase().contains(genero.toLowerCase())){
                 resultado.add(elemento.getDatos().getName());
             }
             if(elemento.getHijoIzq()!= null){
@@ -341,14 +407,63 @@ public class Adapter  {
         ArrayList<IActor> reparto = new ArrayList<>();
         INodo<Relacion> auxPeliAct = listaPeliculasActores.getPrimero();
         while (auxPeliAct!= null){
-            if(auxPeliAct.getDato().getIdPelicula().equals(idPelicula)){
-                IElementoAB<IActor> aux = arbolActores.buscar(auxPeliAct.getDato().getId());
-                reparto.add(aux.getDatos()); 
-                }
+            try{
+                if(auxPeliAct.getDato().getIdPelicula().equals(idPelicula)){
+                    IElementoAB<IActor> aux = arbolActores.buscar(auxPeliAct.getDato().getId());
+                    reparto.add(aux.getDatos()); 
+                } 
+            }catch(NullPointerException e){
+              
+            }
             auxPeliAct=auxPeliAct.getSiguiente();
         }
         return reparto;
     }
+    
+    public ArrayList<IProductor> obtenerProductoresPorPelicula (Comparable idPelicula){
+        ArrayList<IProductor> productores = new ArrayList<>();
+        INodo<Relacion> auxPeliPro = listaPeliculasProductores.getPrimero();
+        while (auxPeliPro != null){
+            if(auxPeliPro.getDato().getIdPelicula().equals(idPelicula)){
+                IElementoAB<IProductor> aux = arbolProductores.buscar(auxPeliPro.getDato().getId());
+                productores.add(aux.getDatos());
+            }
+            auxPeliPro = auxPeliPro.getSiguiente();
+        }
+        
+        return productores;
+    }
+    
+    public ArrayList<IDirector> obtenerDirectoresPorPelicula (Comparable idPelicula){
+        ArrayList<IDirector> directores = new ArrayList<>();
+        INodo<Relacion> auxPeliDire = listaPeliculasDirectores.getPrimero();
+        while ( auxPeliDire != null){
+            if(auxPeliDire.getDato().getIdPelicula().equals(idPelicula)){
+                IElementoAB<IDirector> aux = arbolDirectores.buscar(auxPeliDire.getDato().getId());
+                directores.add(aux.getDatos());
+            }
+            auxPeliDire = auxPeliDire.getSiguiente();
+        }
+        
+        return directores;
+    }
+        
+    public boolean eliminarActor (String nombreExacto){
+        ArrayList<IActor> actor = new ArrayList();
+        buscarActorPorNombreExacto(nombreExacto, arbolActores.getRaiz(),actor);
+        arbolActores.eliminar(actor.get(0).getId());
+        INodo<Relacion> auxPeliActor = listaPeliculasActores.getPrimero();
+        while (auxPeliActor != null){
+            if(auxPeliActor.getDato().getId()== actor.get(0).getId()){
+               listaPeliculasActores.eliminar(auxPeliActor.getDato().getIdPelicula());
+               return true;
+            }
+            auxPeliActor = auxPeliActor.getSiguiente();
+        }
+        return false;
+    }
+    
+    
 
     public String obtenerInfoPelicula(String nombreExacto) {
         infoPelicula = new StringBuilder();
@@ -361,12 +476,25 @@ public class Adapter  {
         infoPelicula.append("RESEÑA:\n").append(pelicula.get(0).getReview()).append("\n").append("\n");
         infoPelicula.append("GENERO:\n").append(pelicula.get(0).getGenre()).append("\n").append("\n");
         
+        
         ArrayList<IActor> reparto = obtenerReparto(pelicula.get(0).getId());
         infoPelicula.append("\nACTORES: ").append("\n");
         for (int i=0; i< reparto.size(); i++){
-            infoPelicula.append(reparto.get(i).getName()).append("\n");
+            infoPelicula.append("- ").append(reparto.get(i).getName()).append("\n");
         }
-       
+
+        ArrayList<IDirector> directores = obtenerDirectoresPorPelicula (pelicula.get(0).getId());
+        infoPelicula.append("\nDIRECTORES: ").append("\n");
+        for (int i=0; i< directores.size(); i++){
+            infoPelicula.append("- ").append(directores.get(i).getName()).append("\n");
+        }
+        
+        ArrayList<IProductor> productores = obtenerProductoresPorPelicula (pelicula.get(0).getId());
+        infoPelicula.append("\nPRODUCTORES: ").append("\n");
+        for (int i=0; i< productores.size(); i++){
+            infoPelicula.append("- ").append(productores.get(i).getName()).append("\n");
+        }
+        
         return infoPelicula.toString();
     }
     

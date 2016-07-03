@@ -43,6 +43,12 @@ public class MovieUcuFrame extends javax.swing.JFrame {
         jComboBoxOpciones = new javax.swing.JComboBox<>();
         jButtonBuscar = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        listActores = new javax.swing.JList<>();
+        btnEliminarActor = new javax.swing.JButton();
+        cmbOpciones = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         addWindowListener(new java.awt.event.WindowAdapter() {
@@ -79,6 +85,7 @@ public class MovieUcuFrame extends javax.swing.JFrame {
         });
 
         jComboBoxOpciones.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jComboBoxOpciones.setMaximumRowCount(3);
         jComboBoxOpciones.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Nombre", "Año", "Genero" }));
         jComboBoxOpciones.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -98,12 +105,53 @@ public class MovieUcuFrame extends javax.swing.JFrame {
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("UCU MOVIE");
 
+        jLabel2.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jLabel2.setText("Peliculas");
+
+        jLabel3.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jLabel3.setText("Descripcion");
+        jLabel3.setToolTipText("");
+
+        listActores.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        listActores.setModel(new javax.swing.AbstractListModel<String>() {
+            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
+            public int getSize() { return strings.length; }
+            public String getElementAt(int i) { return strings[i]; }
+        });
+        jScrollPane3.setViewportView(listActores);
+
+        btnEliminarActor.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        btnEliminarActor.setText("Eliminar Actor");
+        btnEliminarActor.setToolTipText("");
+        btnEliminarActor.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnEliminarActorMouseClicked(evt);
+            }
+        });
+        btnEliminarActor.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEliminarActorActionPerformed(evt);
+            }
+        });
+
+        cmbOpciones.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        cmbOpciones.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Actores", "Productores", "Directores" }));
+        cmbOpciones.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmbOpcionesActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 271, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(211, 211, 211))
             .addGroup(layout.createSequentialGroup()
-                .addGap(29, 29, 29)
+                .addGap(30, 30, 30)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jComboBoxOpciones, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -111,31 +159,55 @@ public class MovieUcuFrame extends javax.swing.JFrame {
                         .addComponent(jTextFieldBusqueda)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jButtonBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jScrollPane1)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 365, Short.MAX_VALUE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel2)
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addGap(0, 0, Short.MAX_VALUE)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 364, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                            .addComponent(btnEliminarActor)
+                                            .addGap(253, 253, 253))
+                                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                            .addComponent(cmbOpciones, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addGap(270, 270, 270))))))
                         .addGap(18, 18, 18)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 347, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(55, 55, 55))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(288, Short.MAX_VALUE)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 271, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(211, 211, 211))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel3)
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 347, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel1)
-                .addGap(12, 12, 12)
+                .addGap(26, 26, 26)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jComboBoxOpciones, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jTextFieldBusqueda, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButtonBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(26, 26, 26)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 320, Short.MAX_VALUE)
-                    .addComponent(jScrollPane2))
-                .addGap(26, 26, 26))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(jLabel3))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 234, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(cmbOpciones, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jScrollPane3))
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 424, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(23, 23, 23)
+                .addComponent(btnEliminarActor)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -151,12 +223,19 @@ public class MovieUcuFrame extends javax.swing.JFrame {
         adapter.crearListaPeliculasDirectores();
         adapter.crearListaPeliculasProductores();
         DefaultListModel model = new DefaultListModel();
+        DefaultListModel model2 = new DefaultListModel();
         ArrayList<String> peliculas = new ArrayList<>();
         adapter.obtenerNombrePeliculas(adapter.getArbolPeliculas().getRaiz(),peliculas);
+        ArrayList<String> actores = new ArrayList<>();
+        adapter.obtenerNombreActores(adapter.getArbolActores().getRaiz(), actores);
         for(int i=0;i<peliculas.size();i++){
             model.addElement(peliculas.get(i));
         }
         jListPeliculas.setModel(model);
+        for(int i=0; i<actores.size();i++){
+            model2.addElement(actores.get(i));
+        }
+        listActores.setModel(model2);
         
         
     }//GEN-LAST:event_formWindowOpened
@@ -216,6 +295,61 @@ public class MovieUcuFrame extends javax.swing.JFrame {
         
     }//GEN-LAST:event_jComboBoxOpcionesActionPerformed
 
+    private void cmbOpcionesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbOpcionesActionPerformed
+        if(cmbOpciones.getSelectedItem().toString().equals("Actores")){
+            ArrayList<String> actores = new ArrayList<>();
+            adapter.obtenerNombreActores(adapter.getArbolActores().getRaiz(), actores);
+            DefaultListModel model2 = new DefaultListModel();
+            for(int i=0; i<actores.size();i++){
+                model2.addElement(actores.get(i));
+            }
+            listActores.setModel(model2);
+            btnEliminarActor.setEnabled(true);
+            }
+        else if(cmbOpciones.getSelectedItem().toString().equals("Productores")){
+            ArrayList<String> productores = new ArrayList<>();
+            adapter.obtenerNombreProductores(adapter.getArbolProductores().getRaiz(), productores);
+            DefaultListModel model3 = new DefaultListModel();
+            for(int i=0; i<productores.size();i++){
+                model3.addElement(productores.get(i));
+            }
+            listActores.setModel(model3);
+            btnEliminarActor.setEnabled(false);
+        }else if(cmbOpciones.getSelectedItem().toString().equals("Directores")){
+            ArrayList<String> directores = new ArrayList<>();
+            adapter.obtenerNombreDirectores(adapter.getArbolDirectores().getRaiz(), directores);
+            DefaultListModel model4 = new DefaultListModel();
+            for(int i=0; i<directores.size();i++){
+                model4.addElement(directores.get(i));
+            }
+            listActores.setModel(model4);
+            btnEliminarActor.setEnabled(false);
+        }
+    }//GEN-LAST:event_cmbOpcionesActionPerformed
+
+    private void btnEliminarActorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActorActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnEliminarActorActionPerformed
+
+    private void btnEliminarActorMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnEliminarActorMouseClicked
+        String selected = (String)listActores.getSelectedValue();
+        adapter.eliminarActor(selected);
+        ArrayList<String> actores = new ArrayList<>();
+        adapter.obtenerNombreActores(adapter.getArbolActores().getRaiz(), actores);
+        DefaultListModel model2 = new DefaultListModel();
+        for(int i=0; i<actores.size();i++){
+            model2.addElement(actores.get(i));
+        }
+        listActores.setModel(model2);
+        ArrayList<String> peliculas = new ArrayList<>();
+        adapter.obtenerNombrePeliculas(adapter.getArbolPeliculas().getRaiz(),peliculas);
+        DefaultListModel model = new DefaultListModel();
+        for(int i=0;i<peliculas.size();i++){
+            model.addElement(peliculas.get(i));
+        }
+        jListPeliculas.setModel(model);
+    }//GEN-LAST:event_btnEliminarActorMouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -252,13 +386,19 @@ public class MovieUcuFrame extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnEliminarActor;
+    private javax.swing.JComboBox<String> cmbOpciones;
     private javax.swing.JButton jButtonBuscar;
     private javax.swing.JComboBox<String> jComboBoxOpciones;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JList<String> jListPeliculas;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JTextArea jTextAreaInfoPelicula;
     private javax.swing.JTextField jTextFieldBusqueda;
+    private javax.swing.JList<String> listActores;
     // End of variables declaration//GEN-END:variables
 }
