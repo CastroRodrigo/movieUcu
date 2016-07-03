@@ -47,7 +47,7 @@ public interface IArbolBB<T> {
 	 * @param Vector de 1 solo elemento conteniendo el contador de llamadas.
 	 * @return Elemento encontrado. En caso de no encontrarlo, retorna nulo.
 	 */
-	public IElementoAB buscar(Comparable unaEtiqueta, Integer[] contador);
+	public IElementoAB buscar(Comparable unaEtiqueta);
 	
 	/**
 	 * Imprime en PreOrden los elementos del �rbol, separados por guiones.

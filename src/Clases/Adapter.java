@@ -3,7 +3,6 @@ package Clases;
 
 import Interfaces.IActor;
 import Interfaces.IDirector;
-import Interfaces.IMovieUcuAdapter;
 import Interfaces.IPelicula;
 import Interfaces.IProductor;
 import TAD.Lista;
@@ -17,7 +16,7 @@ import java.util.ArrayList;
 /**
  * @author Rodrigo Castro
  */
-public class Adapter implements IMovieUcuAdapter {
+public class Adapter  {
 
     ArbolBB<IActor> arbolActores;
     ArbolBB<IPelicula> arbolPeliculas;
@@ -37,17 +36,27 @@ public class Adapter implements IMovieUcuAdapter {
     String textoPeliculasProductores = "src/Files/Big-PeliculasProductores.csv";
     
     
+    public ArbolBB getArbolPeliculas(){
+        return arbolPeliculas;
+    }
     
     
-    @Override
-    public ArrayList<String> obtenerNombrePeliculas() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public ArrayList<String> obtenerNombrePeliculas(IElementoAB<IPelicula> elemento, ArrayList<String> resultado) {
+        if (elemento!= null){
+            resultado.add(elemento.getDatos().getName());
+            if(elemento.getHijoIzq()!= null){
+                obtenerNombrePeliculas(elemento.getHijoIzq(),resultado);
+            }
+            if(elemento.getHijoDer()!= null){
+                obtenerNombrePeliculas(elemento.getHijoDer(), resultado);   
+            }
+        }
+        return resultado;
     }
 
     /**
      * Metodo Almacen que utiliza una estructura de arbol binario para almacenar las peliculas
      */
-    @Override
     public void crearAlmacenPeliculas() {
         String[] lineas = ManejadorArchivosGenerico.leerArchivo(textoPelicula, false);
         for(int linea=0;linea<lineas.length;linea++){
@@ -66,7 +75,6 @@ public class Adapter implements IMovieUcuAdapter {
     /**
      * Metodo Almacen que utiliza una estructura de arbol binario para almacenar las actores
      */
-    @Override
     public void crearAlmacenActores() {
         String[] lineas = ManejadorArchivosGenerico.leerArchivo(textoActores, false);
         for(int linea=0;linea<lineas.length;linea++){
@@ -82,7 +90,6 @@ public class Adapter implements IMovieUcuAdapter {
     /**
      * Metodo Almacen que utiliza una estructura de arbol binario para almacenar las directores
      */
-    @Override
     public void crearAlmacenDirectores() {
         String[] lineas = ManejadorArchivosGenerico.leerArchivo(textoDirectores, false);
         for(int linea=0; linea<lineas.length;linea++){
@@ -98,7 +105,6 @@ public class Adapter implements IMovieUcuAdapter {
     /**
      * Metodo Almacen que utiliza una estructura de arbol binario para almacenar las productores
      */
-    @Override
     public void crearAlmacenProductores() {
         String[] lineas = ManejadorArchivosGenerico.leerArchivo(textoProductores, false);
         for(int linea=0; linea<lineas.length;linea++){
@@ -111,7 +117,6 @@ public class Adapter implements IMovieUcuAdapter {
             }
     }
 
-    @Override
     public void crearListaPeliculasActores() {
         String[] lineas = ManejadorArchivosGenerico.leerArchivo(textoPeliculasActores, false);
         for(int linea=0; linea<lineas.length;linea++){
@@ -127,7 +132,6 @@ public class Adapter implements IMovieUcuAdapter {
             }
     }
 
-    @Override
     public void crearListaPeliculasDirectores() {
         String[] lineas = ManejadorArchivosGenerico.leerArchivo(textoPeliculasDirectores, false);
         for(int linea=0; linea<lineas.length;linea++){
@@ -143,7 +147,6 @@ public class Adapter implements IMovieUcuAdapter {
             }
     }
 
-    @Override
     public void crearListaPeliculasProductores() {
         String[] lineas = ManejadorArchivosGenerico.leerArchivo(textoPeliculasProductores, false);
         for(int linea=0; linea<lineas.length;linea++){
@@ -159,7 +162,6 @@ public class Adapter implements IMovieUcuAdapter {
             }
     }
 
-    @Override
     public void agregarPelicula(IPelicula pelicula) {
         if(pelicula != null){
             if(this.arbolPeliculas == null){
@@ -173,7 +175,6 @@ public class Adapter implements IMovieUcuAdapter {
         }
     }
 
-    @Override
     public void agregarActor(IActor actor) {
         if (actor != null ){
             if(this.arbolActores == null){
@@ -187,7 +188,6 @@ public class Adapter implements IMovieUcuAdapter {
         }
     }
 
-    @Override
     public void agregarDiretor(IDirector director) {
         if (director != null ){
             if(this.arbolDirectores == null){
@@ -201,7 +201,6 @@ public class Adapter implements IMovieUcuAdapter {
         } 
     }
 
-    @Override
     public void agregarProductor(IProductor productor) {
         if (productor != null ){
             if(this.arbolProductores == null){
@@ -215,7 +214,6 @@ public class Adapter implements IMovieUcuAdapter {
         } 
     }
 
-    @Override
     public void agregarRelacionPeliActor(Relacion relacion) {
         if (relacion != null ){
             if(this.listaPeliculasActores == null){
@@ -229,7 +227,6 @@ public class Adapter implements IMovieUcuAdapter {
         } 
     }
 
-    @Override
     public void agregarRelacionPeliDire(Relacion relacion) {
         if (relacion != null ){
             if(this.listaPeliculasDirectores == null){
@@ -243,7 +240,6 @@ public class Adapter implements IMovieUcuAdapter {
         } 
     }
 
-    @Override
     public void agregarRelacionPeliPro(Relacion relacion) {
         if (relacion != null ){
             if(this.listaPeliculasProductores == null){
@@ -257,39 +253,102 @@ public class Adapter implements IMovieUcuAdapter {
         } 
     }
 
-    @Override
     public boolean eliminarPelicula(Comparable idPelicula) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        if(arbolPeliculas.getRaiz() != null){
+            IElementoAB resultado = arbolPeliculas.getRaiz().eliminar(idPelicula);
+            if (resultado != null){
+                return true;
+            }
+        }
+        return false;
     }
 
-    @Override
     public String imprimirPeliculas() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    @Override
     public IPelicula buscarPelicula(Comparable IdPelicula) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        IElementoAB<IPelicula> aux = arbolPeliculas.buscar(IdPelicula);
+        return aux.getDatos();
     }
 
-    @Override
-    public ArrayList<String> buscarPorNombre(String nombre) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public ArrayList<String> buscarPorNombre(String nombre, IElementoAB<IPelicula> elemento, ArrayList<String> resultado) {
+        if (elemento!= null){
+            if( elemento.getDatos().getName().contains(nombre)){
+                resultado.add(elemento.getDatos().getName());
+            }
+            if(elemento.getHijoIzq()!= null){
+                buscarPorNombre(nombre, elemento.getHijoIzq(),resultado);
+            }
+            if(elemento.getHijoDer()!= null){
+                buscarPorNombre(nombre, elemento.getHijoDer(), resultado);
+                
+            }
+                                
+        }
+        return resultado;
+    }
+    
+    public ArrayList<IPelicula> buscarPorNombreExacto(String nombreExacto, IElementoAB<IPelicula> elemento, ArrayList<IPelicula> resultado){
+        if (elemento!= null){
+            if( elemento.getDatos().getName().contains(nombreExacto)){
+                resultado.add(elemento.getDatos());
+            }
+            if(elemento.getHijoIzq()!= null){
+                buscarPorNombreExacto(nombreExacto, elemento.getHijoIzq(),resultado);
+            }
+            if(elemento.getHijoDer()!= null){
+                buscarPorNombreExacto(nombreExacto, elemento.getHijoDer(), resultado);
+                
+            }
+                                
+        }
+        return resultado;
     }
 
-    @Override
-    public ArrayList<String> buscarPorYear(int year) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public ArrayList<String> buscarPorYear(int year, IElementoAB<IPelicula> elemento, ArrayList<String> resultado) {
+        if (elemento!= null){
+            if( elemento.getDatos().getYear() == year){
+                resultado.add(elemento.getDatos().getName());
+            }
+            if(elemento.getHijoIzq()!= null){
+                buscarPorYear(year, elemento.getHijoIzq(),resultado);
+            }
+            if(elemento.getHijoDer()!= null){
+                buscarPorYear(year, elemento.getHijoDer(), resultado);
+            }                     
+        }
+        return resultado;
+        
     }
 
-    @Override
-    public ArrayList<String> buscarPorGenero(String genero) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public ArrayList<String> buscarPorGenero(String genero, IElementoAB<IPelicula> elemento, ArrayList<String> resultado) {
+        if (elemento!= null){
+            if( elemento.getDatos().getGenre().contains(genero)){
+                resultado.add(elemento.getDatos().getName());
+            }
+            if(elemento.getHijoIzq()!= null){
+                buscarPorGenero(genero, elemento.getHijoIzq(),resultado);
+            }
+            if(elemento.getHijoDer()!= null){
+                buscarPorGenero(genero, elemento.getHijoDer(), resultado);
+            }                     
+        }
+        return resultado;
     }
 
-    @Override
     public String obtenerInfoPelicula(String nombreExacto) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        infoPelicula = new StringBuilder();
+        ArrayList<IPelicula> pelicula = new ArrayList();
+        buscarPorNombreExacto(nombreExacto, arbolPeliculas.getRaiz(),pelicula);
+        infoPelicula.append("IDENTIFICADOR: ").append(pelicula.get(0).getId().toString()).append("\n");
+        infoPelicula.append("NOMBRE: ").append(pelicula.get(0).getName()).append("\n");
+        infoPelicula.append("PUNTUACION: ").append(pelicula.get(0).getPuntuation()).append("\n");
+        infoPelicula.append("AÑO: ").append(pelicula.get(0).getYear()).append("\n");
+        infoPelicula.append("RESEÑA:\n").append(pelicula.get(0).getReview()).append("\n");
+        infoPelicula.append("GENERO:\n").append(pelicula.get(0).getGenre()).append("\n");
+       
+        return infoPelicula.toString();
     }
     
 }

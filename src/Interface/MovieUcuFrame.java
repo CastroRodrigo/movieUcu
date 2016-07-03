@@ -17,7 +17,7 @@ import javax.swing.JOptionPane;
  */
 public class MovieUcuFrame extends javax.swing.JFrame {
     
-    public IMovieUcuAdapter adapter;
+    public Adapter adapter;
     
     /**
      * Creates new form MovieUcuFrame
@@ -142,7 +142,7 @@ public class MovieUcuFrame extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
-        adapter = new MovieUcuAdapter();
+        adapter = new Adapter();
         adapter.crearAlmacenPeliculas();
         adapter.crearAlmacenActores();
         adapter.crearAlmacenDirectores();
@@ -151,7 +151,8 @@ public class MovieUcuFrame extends javax.swing.JFrame {
         adapter.crearListaPeliculasDirectores();
         adapter.crearListaPeliculasProductores();
         DefaultListModel model = new DefaultListModel();
-        ArrayList<String> peliculas = adapter.obtenerNombrePeliculas();
+        ArrayList<String> peliculas = new ArrayList<>();
+        adapter.obtenerNombrePeliculas(adapter.getArbolPeliculas().getRaiz(),peliculas);
         for(int i=0;i<peliculas.size();i++){
             model.addElement(peliculas.get(i));
         }
@@ -172,7 +173,8 @@ public class MovieUcuFrame extends javax.swing.JFrame {
     private void jButtonBuscarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonBuscarMouseClicked
         if(jComboBoxOpciones.getSelectedItem().toString().equals("Nombre")){
             String nombreABuscar = jTextFieldBusqueda.getText();
-            ArrayList<String> listaResultados = adapter.buscarPorNombre(nombreABuscar);
+            ArrayList<String> listaResultados = new ArrayList<String>();
+            adapter.buscarPorNombre(nombreABuscar, adapter.getArbolPeliculas().getRaiz(),listaResultados);
             DefaultListModel model = new DefaultListModel();
             for(int i=0;i<listaResultados.size();i++){
                 model.addElement(listaResultados.get(i));
@@ -182,7 +184,8 @@ public class MovieUcuFrame extends javax.swing.JFrame {
         else if(jComboBoxOpciones.getSelectedItem().toString().equals("Año")){
             try {
                 int yearBuscar= Integer.parseInt(jTextFieldBusqueda.getText());
-                ArrayList<String> listaResultados = adapter.buscarPorYear(yearBuscar);
+                ArrayList<String> listaResultados = new ArrayList<>();
+                adapter.buscarPorYear(yearBuscar,adapter.getArbolPeliculas().getRaiz(),listaResultados);
                 DefaultListModel model = new DefaultListModel();
                 for(int i=0;i<listaResultados.size();i++){
                     model.addElement(listaResultados.get(i));
@@ -196,7 +199,8 @@ public class MovieUcuFrame extends javax.swing.JFrame {
         }
         else if(jComboBoxOpciones.getSelectedItem().toString().equals("Genero")){
             String generoABuscar = jTextFieldBusqueda.getText();
-            ArrayList<String> listaResultados = adapter.buscarPorGenero(generoABuscar);
+            ArrayList<String> listaResultados = new ArrayList<>();
+            adapter.buscarPorGenero(generoABuscar, adapter.getArbolPeliculas().getRaiz(),listaResultados);
             DefaultListModel model = new DefaultListModel();
             for(int i=0;i<listaResultados.size();i++){
                 model.addElement(listaResultados.get(i));

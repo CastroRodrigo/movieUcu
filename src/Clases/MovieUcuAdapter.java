@@ -78,6 +78,7 @@ public class MovieUcuAdapter implements IMovieUcuAdapter {
         return nombres.toString();
     }
     
+    @Override
     public ArrayList<String> obtenerNombrePeliculas (){
         ArrayList<String> nombres = new ArrayList();
         INodo<IPelicula> aux = listaPeliculas.getPrimero();

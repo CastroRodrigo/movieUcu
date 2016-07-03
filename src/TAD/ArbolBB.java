@@ -8,10 +8,16 @@ public class ArbolBB<T> implements IArbolBB<T> {
     
     protected IElementoAB raiz;    
 
+    
+    
     public ArbolBB() {        
                
     }
     
+    public IElementoAB getRaiz(){
+        return raiz;
+    }
+            
     @Override
     public boolean insertar(IElementoAB unElemento) {
         if (raiz == null){
@@ -39,15 +45,12 @@ public class ArbolBB<T> implements IArbolBB<T> {
     }
 
     @Override
-    public IElementoAB buscar(Comparable unaEtiqueta, Integer[] contador) {
+    public IElementoAB buscar(Comparable unaEtiqueta) {
         IElementoAB resultado = null;
         if (raiz == null) {
 		return null;
 	} else {
-            contador[1]=0;
-	    resultado = raiz.buscar(unaEtiqueta,contador);
-            System.out.println(contador[1]); /* Muestra por consola el contenido            
-                                                           final del contador */            
+	    resultado = raiz.buscar(unaEtiqueta);     
             return resultado;
 	}
     }

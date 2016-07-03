@@ -37,7 +37,7 @@ public class ElementoAB<T> implements IElementoAB<T> {
     
     @Override
     public T getDatos() {
-        return this.datos;
+        return datos;
     }
     
     @Override
@@ -51,26 +51,21 @@ public class ElementoAB<T> implements IElementoAB<T> {
     }
 
     @Override
-    public IElementoAB buscar(Comparable unaEtiqueta, Integer[] contador) {
-        contador[1]+=1; //Incrementa el contador en cada invocación al mimso.
+    public IElementoAB buscar(Comparable unaEtiqueta) {
         if (unaEtiqueta.compareTo(etiqueta) == 0) {            
             return this;
         } else {
             if (unaEtiqueta.compareTo(etiqueta) < 0) {
                 if (hijoIzq != null) {                    
-                    return hijoIzq.buscar(unaEtiqueta, contador);
+                    return hijoIzq.buscar(unaEtiqueta);
                 } else {
-                    contador [1] = -1 * contador[1]; /*Si la clave no se 
-                              encuentra retorna el contador con valor negativo*/
                     return null;
                 }
             } else {
                 if (unaEtiqueta.compareTo(etiqueta) > 0) {
                     if (hijoDer != null) {                       
-                        return hijoDer.buscar(unaEtiqueta,contador);
+                        return hijoDer.buscar(unaEtiqueta);
                     } else {
-                        contador [1] = -1 * contador[1]; /*Si la clave no se 
-                              encuentra retorna el contador con valor negativo*/
                         return null;
                     }
                 } else {
