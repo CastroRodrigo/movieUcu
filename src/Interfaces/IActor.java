@@ -17,5 +17,23 @@ public interface IActor {
      */
     public String getName();
     
+    /**
+     * Metodo que retorna la fecha de nacimiento del actor
+     * @return  nacimiento de tipo string
+     */
+    public String getFechaNaciemiento();
+    
+    /**
+     * Metodo que retorna el lugar de nacimiento
+     * @return  lugarNacimiento de tipo String
+     */
+    public String getLugarNacimiento();
+    
+    /**
+     * Metodo que retorna una biografia del actor
+     * @return biografia de tipo String
+     */
+    public String getBiografia();
+    
     
 }

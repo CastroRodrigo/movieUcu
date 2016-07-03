@@ -27,31 +27,51 @@ public class Adapter  {
     Lista<Relacion> listaPeliculasProductores;
     ArrayList<String> listaBusquedas;
     StringBuilder infoPelicula;
-    String textoProductores = "src/Files/Big-Productores.csv";
-    String textoDirectores = "src/Files/Big-Directores.csv" ;
-    String textoActores = "src/Files/Big-Actores.csv";
-    String textoPelicula = "src/Files/Big-Peliculas.csv";
-    String textoPeliculasActores = "src/Files/Big-PeliculasActores.csv";
-    String textoPeliculasDirectores = "src/Files/Big-PeliculasDirectores.csv";
-    String textoPeliculasProductores = "src/Files/Big-PeliculasProductores.csv";
+    String textoProductores = "src/Files/Smallv2-Productores.csv";
+    String textoDirectores = "src/Files/Smallv2-Directores.csv" ;
+    String textoActores = "src/Files/Smallv2-Actores.csv";
+    String textoPelicula = "src/Files/Smallv2-Peliculas.csv";
+    String textoPeliculasActores = "src/Files/Smallv2-PeliculasActores.csv";
+    String textoPeliculasDirectores = "src/Files/Smallv2-PeliculasDirectores.csv";
+    String textoPeliculasProductores = "src/Files/Smallv2-PeliculasProductores.csv";
     
-    
+    /**
+     * Metodo que retorna el arbol de prliculas
+     * @return arbolPeliculas de tipo ArbolBB
+     */
     public ArbolBB<IPelicula> getArbolPeliculas(){
         return arbolPeliculas;
     }
-    
+    /**
+     * Metdo que retorna el Arbol de Actores
+     * @return arbolActores de tipo ArbolBB
+     */
     public ArbolBB<IActor> getArbolActores(){
         return arbolActores;
     }
     
+    /**
+     * Metodo que retorna el Arbol de directores
+     * @return arbolDirectores de tipo ArbolBB
+     */
     public ArbolBB<IDirector> getArbolDirectores(){
         return arbolDirectores;
     }
     
+    /**
+     * Metodo que retorna el arbol de productores
+     * @return arbolProductores de tipo ArbolBB 
+     */
     public ArbolBB<IProductor> getArbolProductores(){
         return arbolProductores;
     }
     
+    /**
+     * Metodo que retorna un Array con los nombres de las peliculas
+     * @param elemento nodo raiz del arbol
+     * @param resultado array con los nombres de las peliculas
+     * @return resultado array con los nombres de las peliculas
+     */
     public ArrayList<String> obtenerNombrePeliculas(IElementoAB<IPelicula> elemento, ArrayList<String> resultado) {
         if (elemento!= null){
             resultado.add(elemento.getDatos().getName());
@@ -64,7 +84,12 @@ public class Adapter  {
         }
         return resultado;
     }
-    
+    /**
+     * Metodo que retorna un Array con los nombres de los actores
+     * @param elemento nodo raiz del arbol
+     * @param resultado array con los nombres de los actores
+     * @return resultado array con los nombres de los actores
+     */
     public ArrayList<String> obtenerNombreActores(IElementoAB<IActor> elemento, ArrayList<String> resultado){
         if (elemento!= null){
             resultado.add(elemento.getDatos().getName());
@@ -78,6 +103,12 @@ public class Adapter  {
         return resultado;
     }
     
+    /**
+     * Metodo que retorna un Array con los nombres de los productores
+     * @param elemento nodo raiz del arbol
+     * @param resultado array con los nombres de los productores
+     * @return resultado array con los nombres de los productores
+     */
     public ArrayList<String> obtenerNombreProductores (IElementoAB<IProductor> elemento, ArrayList<String> resultado){
         if(elemento != null){
             resultado.add(elemento.getDatos().getName());
@@ -92,6 +123,12 @@ public class Adapter  {
         return resultado;
     }
 
+    /**
+     * Metodo que retorna un Array con los nombres de los directores
+     * @param elemento nodo raiz del arbol
+     * @param resultado array con los nombres de los directores
+     * @return resultado array con los nombres de los directores
+     */
     public ArrayList<String> obtenerNombreDirectores( IElementoAB<IDirector> elemento, ArrayList<String> resultado){
         if(elemento != null){
             resultado.add(elemento.getDatos().getName());
@@ -133,7 +170,7 @@ public class Adapter  {
                 if(datos[0].compareTo("") == 0){
                     datos[0]= "-1";
                 }
-                IActor act = new Actor(Integer.parseInt(datos[0]),datos[1]);
+                IActor act = new Actor(Integer.parseInt(datos[0]),datos[1],datos[2],datos[3],datos[4]);
                 this.agregarActor(act);
             }
     }
@@ -168,6 +205,9 @@ public class Adapter  {
             }
     }
 
+    /**
+     * Metodo que agrega los elementos a la lista de relaciones
+     */
     public void crearListaPeliculasActores() {
         String[] lineas = ManejadorArchivosGenerico.leerArchivo(textoPeliculasActores, false);
         for(int linea=0; linea<lineas.length;linea++){
@@ -183,6 +223,9 @@ public class Adapter  {
             }
     }
 
+    /**
+     * Metodo que agrega los elementos a la lista de relaciones
+     */
     public void crearListaPeliculasDirectores() {
         String[] lineas = ManejadorArchivosGenerico.leerArchivo(textoPeliculasDirectores, false);
         for(int linea=0; linea<lineas.length;linea++){
@@ -198,6 +241,9 @@ public class Adapter  {
             }
     }
 
+    /**
+     * Metodo que agrega los elementos a la lista de relaciones
+     */
     public void crearListaPeliculasProductores() {
         String[] lineas = ManejadorArchivosGenerico.leerArchivo(textoPeliculasProductores, false);
         for(int linea=0; linea<lineas.length;linea++){
@@ -213,6 +259,10 @@ public class Adapter  {
             }
     }
 
+    /**
+     * Metodo que inserta una peliculas al arbol/lista
+     * @param pelicula de tipo IPelicula
+     */
     public void agregarPelicula(IPelicula pelicula) {
         if(pelicula != null){
             if(this.arbolPeliculas == null){
@@ -226,6 +276,10 @@ public class Adapter  {
         }
     }
 
+    /**
+     * Metodo que inserta un actor al arbol/lista
+     * @param actor de tipo IActor
+     */
     public void agregarActor(IActor actor) {
         if (actor != null ){
             if(this.arbolActores == null){
@@ -239,6 +293,10 @@ public class Adapter  {
         }
     }
 
+    /**
+     * Metodo que inserta un director al arbol/lista
+     * @param director de tipo IDirector
+     */
     public void agregarDiretor(IDirector director) {
         if (director != null ){
             if(this.arbolDirectores == null){
@@ -252,6 +310,10 @@ public class Adapter  {
         } 
     }
 
+    /**
+     * Metodo que inserta un director al arbol/lista
+     * @param productor de tipo IDirector
+     */
     public void agregarProductor(IProductor productor) {
         if (productor != null ){
             if(this.arbolProductores == null){
@@ -265,6 +327,10 @@ public class Adapter  {
         } 
     }
 
+    /**
+     * Metodo que inserta una relacion a una lista/arbol
+     * @param relacion de tipo Relacion
+     */
     public void agregarRelacionPeliActor(Relacion relacion) {
         if (relacion != null ){
             if(this.listaPeliculasActores == null){
@@ -278,6 +344,10 @@ public class Adapter  {
         } 
     }
 
+    /**
+     * Metodo que inserta una relacion a una lista/arbol
+     * @param relacion de tipo Relacion
+     */
     public void agregarRelacionPeliDire(Relacion relacion) {
         if (relacion != null ){
             if(this.listaPeliculasDirectores == null){
@@ -291,6 +361,10 @@ public class Adapter  {
         } 
     }
 
+    /**
+     * Metodo que inserta una relacion a una lista/arbol
+     * @param relacion de tipo Relacion
+     */
     public void agregarRelacionPeliPro(Relacion relacion) {
         if (relacion != null ){
             if(this.listaPeliculasProductores == null){
@@ -304,6 +378,11 @@ public class Adapter  {
         } 
     }
 
+    /**
+     * Metodo que elimina una pelicula del arbol/lista
+     * @param idPelicula de tipo Comparable
+     * @return true or false
+     */
     public boolean eliminarPelicula(Comparable idPelicula) {
         if(arbolPeliculas.getRaiz() != null){
             IElementoAB resultado = arbolPeliculas.getRaiz().eliminar(idPelicula);
@@ -318,11 +397,23 @@ public class Adapter  {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
+    /**
+     * Metodo que permite buscar una pelicula por id
+     * @param IdPelicula de tipo omparable
+     * @return 
+     */
     public IPelicula buscarPelicula(Comparable IdPelicula) {
         IElementoAB<IPelicula> aux = arbolPeliculas.buscar(IdPelicula);
         return aux.getDatos();
     }
 
+    /**
+     * Metodo que permite buscar una pelicula por nombre
+     * @param nombre de tipo String
+     * @param elemento de tipo IElementoAB
+     * @param resultado de tipo ArrayList
+     * @return resultado de tipo ArrayList
+     */
     public ArrayList<String> buscarPorNombre(String nombre, IElementoAB<IPelicula> elemento, ArrayList<String> resultado) {
         if (elemento!= null){
             if( elemento.getDatos().getName().toLowerCase().contains(nombre.toLowerCase())){
@@ -340,6 +431,13 @@ public class Adapter  {
         return resultado;
     }
     
+    /**
+     * Metodo que permite buscar una pelicula con su nombre exacto
+     * @param nombreExacto el nombre exacto de la pelicula
+     * @param elemento de tipo IElementoAB
+     * @param resultado de tipo Arraylist
+     * @return resultado de tipo ArrayList
+     */
     public ArrayList<IPelicula> buscarPorNombreExacto(String nombreExacto, IElementoAB<IPelicula> elemento, ArrayList<IPelicula> resultado){
         if (elemento!= null){
             if( elemento.getDatos().getName().contains(nombreExacto)){
@@ -357,6 +455,13 @@ public class Adapter  {
         return resultado;
     }
     
+    /**
+     * Metodo que permite buscar un actor por su nombre
+     * @param nombreExacto Nombre exacto del actor
+     * @param elemento de tipo IElemento 
+     * @param resultado de tipo ArrayLIst
+     * @return resultado de tipo ArrayList
+     */
     public ArrayList<IActor> buscarActorPorNombreExacto (String nombreExacto, IElementoAB<IActor> elemento, ArrayList<IActor> resultado){
         if(elemento != null){
             if( elemento.getDatos().getName().contains(nombreExacto)){
@@ -372,6 +477,13 @@ public class Adapter  {
         return resultado;
     }
 
+    /**
+     * Metodo que permite buscar una pelicula por año
+     * @param year año de estreno de lapelicula
+     * @param elemento de IElemento
+     * @param resultado de tipo ArrayList
+     * @return resultado de tipo ArrayList
+     */
     public ArrayList<String> buscarPorYear(int year, IElementoAB<IPelicula> elemento, ArrayList<String> resultado) {
         if (elemento!= null){
             if( elemento.getDatos().getYear() == year){
@@ -388,6 +500,13 @@ public class Adapter  {
         
     }
 
+    /**
+     * Metodo que permite buscar una pelicula por genero
+     * @param genero de tipo String
+     * @param elemento de tipo IElemento
+     * @param resultado de tipo ArrayList
+     * @return resultado de ArrayList
+     */
     public ArrayList<String> buscarPorGenero(String genero, IElementoAB<IPelicula> elemento, ArrayList<String> resultado) {
         if (elemento!= null){
             if( elemento.getDatos().getGenre().toLowerCase().contains(genero.toLowerCase())){
@@ -403,6 +522,11 @@ public class Adapter  {
         return resultado;
     }
     
+    /**
+     * Metodo que devuelve una lista con todos los actores de una pelicula en particular
+     * @param idPelicula de tipo Comparable
+     * @return reparto de tipo ArrayList
+     */
     public ArrayList<IActor> obtenerReparto (Comparable idPelicula){
         ArrayList<IActor> reparto = new ArrayList<>();
         INodo<Relacion> auxPeliAct = listaPeliculasActores.getPrimero();
@@ -420,6 +544,11 @@ public class Adapter  {
         return reparto;
     }
     
+    /**
+     * Metodo que devuelve una lista con todos los productores de una pelicula
+     * @param idPelicula de tipo comprable
+     * @return productores de tipo ArrayList
+     */
     public ArrayList<IProductor> obtenerProductoresPorPelicula (Comparable idPelicula){
         ArrayList<IProductor> productores = new ArrayList<>();
         INodo<Relacion> auxPeliPro = listaPeliculasProductores.getPrimero();
@@ -434,6 +563,11 @@ public class Adapter  {
         return productores;
     }
     
+    /**
+     * Metodo que devuelve una lista con los directores de una pelicula en particularr 
+     * @param idPelicula de tipo Comparable
+     * @return direcotres de tipo ArrayList
+     */
     public ArrayList<IDirector> obtenerDirectoresPorPelicula (Comparable idPelicula){
         ArrayList<IDirector> directores = new ArrayList<>();
         INodo<Relacion> auxPeliDire = listaPeliculasDirectores.getPrimero();
@@ -448,6 +582,11 @@ public class Adapter  {
         return directores;
     }
         
+    /**
+     * Metodo que permite eliminar una actor del arbol/Lista de actores y todas sus referencias
+     * @param nombreExacto nombre del actor
+     * @return true o false
+     */
     public boolean eliminarActor (String nombreExacto){
         ArrayList<IActor> actor = new ArrayList();
         buscarActorPorNombreExacto(nombreExacto, arbolActores.getRaiz(),actor);
@@ -464,7 +603,11 @@ public class Adapter  {
     }
     
     
-
+    /**
+     * Metodo que devuelve toda la informacion de una pelicula en particular 
+     * @param nombreExacto nombre de la pelicula
+     * @return InfoPelicula de tipo String
+     */
     public String obtenerInfoPelicula(String nombreExacto) {
         infoPelicula = new StringBuilder();
         ArrayList<IPelicula> pelicula = new ArrayList();

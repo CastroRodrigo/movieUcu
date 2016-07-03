@@ -6,7 +6,6 @@
 package Interface;
 
 import Clases.*;
-import Interfaces.IMovieUcuAdapter;
 import java.util.ArrayList;
 import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
