@@ -431,6 +431,28 @@ public class Adapter  {
         return resultado;
     }
     
+    public ArrayList<String> buscarPorActor(String nombre, IElementoAB<IActor> elemento, ArrayList<String> resultado){
+        if(elemento!= null){
+            if(elemento.getDatos().getName().trim().toLowerCase().contains(nombre.toLowerCase())){
+                INodo<Relacion> aux = listaPeliculasActores.getPrimero();
+                while(aux!= null){
+                    if(elemento.getDatos().getId() == aux.getDato().getId()){
+                        IElementoAB<IPelicula> pelicula = arbolPeliculas.buscar(aux.getDato().getIdPelicula());
+                        resultado.add(pelicula.getDatos().getName());
+                    }
+                    aux = aux.getSiguiente();  
+                }   
+            }
+            if(elemento.getHijoIzq()!= null){
+                buscarPorActor(nombre,elemento.getHijoIzq(),resultado);
+            }
+            if(elemento.getHijoDer()!= null){
+                buscarPorActor(nombre,elemento.getHijoDer(),resultado);
+            }    
+        }
+        return resultado;
+    }
+    
     /**
      * Metodo que permite buscar una pelicula con su nombre exacto
      * @param nombreExacto el nombre exacto de la pelicula

@@ -84,8 +84,8 @@ public class MovieUcuFrame extends javax.swing.JFrame {
         });
 
         jComboBoxOpciones.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        jComboBoxOpciones.setMaximumRowCount(3);
-        jComboBoxOpciones.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Nombre", "Año", "Genero" }));
+        jComboBoxOpciones.setMaximumRowCount(4);
+        jComboBoxOpciones.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Nombre", "Año", "Genero", "Actor" }));
         jComboBoxOpciones.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jComboBoxOpcionesActionPerformed(evt);
@@ -285,6 +285,16 @@ public class MovieUcuFrame extends javax.swing.JFrame {
             }
             jListPeliculas.setModel(model); 
             
+        }
+        else if(jComboBoxOpciones.getSelectedItem().toString().equals("Actor")){
+            String actorABuscar = jTextFieldBusqueda.getText();
+            ArrayList<String> listaResultados2 = new ArrayList<>();
+            adapter.buscarPorActor(actorABuscar, adapter.getArbolActores().getRaiz(), listaResultados2);
+            DefaultListModel model6 = new DefaultListModel();
+            for(int i=0;i<listaResultados2.size();i++){
+                model6.addElement(listaResultados2.get(i));
+            }
+            jListPeliculas.setModel(model6); 
         }
         
     }//GEN-LAST:event_jButtonBuscarMouseClicked
